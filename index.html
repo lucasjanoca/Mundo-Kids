@@ -132,7 +132,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}
 .mapRoute{pointer-events:auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border-radius:15px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;font-weight:900;box-shadow:0 13px 28px rgba(7,94,255,.25);border:2px solid rgba(255,255,255,.85)}
 .mapRoute:hover{transform:translateY(-1px)}
 .mapFx{position:absolute;inset:0;z-index:3;overflow:hidden;pointer-events:none}
-.mapPlane{position:absolute;left:-72px;width:auto;height:auto;display:block;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;color:inherit;font-size:2.4rem;line-height:1;opacity:0;animation:mapFly 18s linear infinite;filter:drop-shadow(0 6px 5px rgba(23,55,86,.22));will-change:left,transform,opacity;transform-origin:center center}
+.mapPlane{position:absolute;left:-72px;width:auto;height:auto;display:block;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;color:inherit;font-size:2.4rem;line-height:1;opacity:0;animation:mapFly 18s linear infinite;filter:drop-shadow(0 6px 5px rgba(23,55,86,.22));will-change:left,transform,opacity;transform-origin:center center;white-space:nowrap}
 .mapPlane:after{content:none!important}
 .mapPlane.p1{top:30%;animation-delay:1s}
 .mapPlane.p2{top:62%;font-size:2rem;animation-duration:23s;animation-delay:9s}
@@ -149,7 +149,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}
 .batChest:after{content:"";position:absolute;left:9px;right:9px;bottom:10px;height:5px;border-radius:99px;background:#9b7b28}
 .batBubble{position:absolute;right:52px;top:0;padding:6px 9px;border-radius:11px 11px 3px 11px;background:rgba(255,255,255,.96);border:1px solid #dbe7ef;color:#172541;font-size:.6rem;font-weight:900;white-space:nowrap;box-shadow:0 8px 16px rgba(17,65,113,.12)}
 .batBubble:after{content:"";position:absolute;right:-5px;bottom:1px;width:9px;height:9px;background:#fff;border-top:1px solid #dbe7ef;border-right:1px solid #dbe7ef;transform:rotate(45deg)}
-@keyframes mapFly{0%{left:-72px;transform:translateY(18px) rotate(0deg) scale(.92);opacity:0}7%{opacity:.98}50%{transform:translateY(-18px) rotate(-4deg) scale(1)}92%{opacity:.98}100%{left:calc(100% + 30px);transform:translateY(-42px) rotate(-4deg) scale(1.04);opacity:0}}
+@keyframes mapFly{0%{left:-72px;transform:rotate(30deg) scale(.94);opacity:0}7%{opacity:.98}92%{opacity:.98}100%{left:calc(100% + 30px);transform:rotate(30deg) scale(1.02);opacity:0}}7%{opacity:.98}50%{transform:translateY(-18px) rotate(-4deg) scale(1)}92%{opacity:.98}100%{left:calc(100% + 30px);transform:translateY(-42px) rotate(-4deg) scale(1.04);opacity:0}}
 @keyframes batPeek{0%,58%,100%{right:-46px;opacity:0}62%{opacity:1}67%,82%{right:-12px;opacity:1}87%{right:-28px;opacity:.8}92%{right:-46px;opacity:0}}
 @media(prefers-reduced-motion:reduce){.mapPlane,.mapBatman{animation:none;display:none}}
 @media(max-width:680px){.mapPlane{width:70px;height:45px}.mapPlane.p2{width:58px;height:38px}.mapPlane:after{right:58px;top:22px;width:54px}.mapBatman{transform:scale(.92);transform-origin:right center}}
