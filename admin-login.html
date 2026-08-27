@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#1565ff">
+<title>Mundo Kids | Acesso ADM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--b:#1565ff;--bd:#0d49d6;--p:#f5369d;--ink:#172541;--txt:#455c73;--muted:#72879d;--line:#dbe6ef;--sh:0 22px 60px rgba(16,66,115,.13)}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:22px;font-family:Nunito,system-ui,sans-serif;background:radial-gradient(circle at top right,#e8f5ff,#f7fbff 45%,#fff);color:var(--txt)}.card{width:min(100%,470px);background:#fff;border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:var(--sh)}.logo{font:800 2rem "Baloo 2";letter-spacing:-1.2px}.m{color:#f5369d}.u{color:#ff972e}.n{color:#35bf4f}.d{color:#8f52f1}.o{color:#e7b000}.k{color:#1565ff}.badge{display:inline-flex;margin-top:18px;padding:7px 12px;border-radius:999px;background:#eef6ff;color:#0c6da5;font-size:.76rem;font-weight:900;text-transform:uppercase}.card h1{font:800 2.35rem "Baloo 2";line-height:1;color:var(--ink);margin:12px 0 8px}.lead{margin:0 0 22px;color:var(--muted)}label{display:block;margin:13px 0 6px;font-weight:900;color:#2d4862}input{width:100%;padding:13px;border:1px solid var(--line);border-radius:13px;outline:0}.pass{position:relative}.pass input{padding-right:82px}.show{position:absolute;right:8px;top:7px;padding:7px 10px;border:0;border-radius:9px;background:#eef6ff;color:#1565ff;font-weight:900}.btn{width:100%;margin-top:18px;padding:14px;border:0;border-radius:14px;background:linear-gradient(135deg,var(--b),var(--bd));color:#fff;font-weight:900;cursor:pointer}.msg{min-height:22px;margin:12px 0 0;font-size:.86rem;font-weight:800}.msg.err{color:#b92d4c}.msg.ok{color:#16813a}.back{display:block;text-align:center;margin-top:17px;color:#617a91;font-weight:800;text-decoration:none}
+</style>
+</head>
+<body>
+<main class="card">
+<div class="logo"><span class="m">M</span><span class="u">U</span><span class="n">N</span><span class="d">D</span><span class="o">O</span> <span class="k">KIDS</span></div>
+<span class="badge">Acesso administrativo</span>
+<h1>Entrar no painel</h1>
+<p class="lead">Use a mesma conta administrativa da InfoTech.io.</p>
+<form id="login"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email" required><label for="password">Senha</label><div class="pass"><input id="password" name="password" type="password" autocomplete="current-password" required><button type="button" class="show" id="toggle">Mostrar</button></div><button class="btn" id="submit">Entrar</button><p class="msg" id="msg" aria-live="polite"></p></form>
+<a class="back" href="index.html">← Voltar para a loja</a>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.3"></script>
+<script>
+const db=supabase.createClient("https://rgngqumqzylthdiazvfu.supabase.co","sb_publishable_Nw2oaGdMQHVIJNhUpjv5ag_JcxmRu2w",{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:"mundo-kids-admin-auth"}});
+const msg=document.getElementById("msg"),form=document.getElementById("login"),btn=document.getElementById("submit");
+function message(t,type){msg.textContent=t;msg.className="msg "+type}
+async function role(user){const {data,error}=await db.from("profiles").select("role,is_blocked").eq("id",user.id).maybeSingle();if(error)throw error;return data}
+db.auth.getSession().then(async({data})=>{if(data.session?.user){try{const p=await role(data.session.user);if(p?.role==="admin"&&!p?.is_blocked)location.replace("admin.html")}catch{}}});
+document.getElementById("toggle").onclick=()=>{const p=document.getElementById("password");const show=p.type==="password";p.type=show?"text":"password";document.getElementById("toggle").textContent=show?"Ocultar":"Mostrar"};
+form.onsubmit=async e=>{e.preventDefault();btn.disabled=true;message("Verificando acesso...","ok");try{const email=document.getElementById("email").value.trim().toLowerCase(),password=document.getElementById("password").value;const {data,error}=await db.auth.signInWithPassword({email,password});if(error||!data.user){message("E-mail ou senha incorretos.","err");return}const p=await role(data.user);if(p?.role!=="admin"||p?.is_blocked){await db.auth.signOut();message("Esta conta não possui acesso administrativo.","err");return}message("Acesso autorizado.","ok");setTimeout(()=>location.replace("admin.html"),250)}catch(e){console.error(e);message("Não foi possível entrar agora. Tente novamente.","err")}finally{btn.disabled=false}};
+</script>
+</body>
+</html>
