@@ -126,6 +126,21 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}
 .mapBottom{position:absolute;z-index:4;left:17px;right:17px;bottom:17px;display:flex;justify-content:flex-end;pointer-events:none}
 .mapRoute{pointer-events:auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border-radius:15px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;font-weight:900;box-shadow:0 13px 28px rgba(7,94,255,.25);border:2px solid rgba(255,255,255,.85)}
 .mapRoute:hover{transform:translateY(-1px)}
+.mapFx{position:absolute;inset:0;z-index:3;overflow:hidden;pointer-events:none}
+.mapPlane{position:absolute;left:-48px;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.92);border:1px solid rgba(220,231,239,.95);box-shadow:0 8px 18px rgba(17,65,113,.13);color:#175fb8;font-size:.95rem;opacity:0;animation:mapFly 18s linear infinite}
+.mapPlane.p1{top:30%;animation-delay:1s}
+.mapPlane.p2{top:62%;animation-duration:23s;animation-delay:9s}
+.mapBatman{position:absolute;right:-46px;top:50%;width:108px;height:122px;opacity:0;animation:batPeek 11s ease-in-out infinite;filter:drop-shadow(0 8px 12px rgba(0,0,0,.15))}
+.batHead{position:absolute;right:14px;top:22px;width:46px;height:46px;border-radius:50% 50% 43% 43%;background:#111827}
+.batHead:before,.batHead:after{content:"";position:absolute;top:-12px;width:14px;height:21px;background:#111827;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.batHead:before{left:5px}.batHead:after{right:5px}
+.batFace{position:absolute;right:22px;top:40px;width:28px;height:12px;border-radius:50%;border-top:3px solid #d6dce5;opacity:.75}
+.batCape{position:absolute;right:0;top:61px;width:76px;height:62px;background:#0e1522;clip-path:polygon(28% 0,100% 8%,96% 100%,70% 78%,51% 100%,31% 77%,6% 100%,0 14%);border-radius:18px}
+.batBubble{position:absolute;right:52px;top:0;padding:6px 9px;border-radius:11px 11px 3px 11px;background:rgba(255,255,255,.96);border:1px solid #dbe7ef;color:#172541;font-size:.6rem;font-weight:900;white-space:nowrap;box-shadow:0 8px 16px rgba(17,65,113,.12)}
+.batBubble:after{content:"";position:absolute;right:-5px;bottom:1px;width:9px;height:9px;background:#fff;border-top:1px solid #dbe7ef;border-right:1px solid #dbe7ef;transform:rotate(45deg)}
+@keyframes mapFly{0%{left:-48px;transform:translateY(18px) rotate(-8deg) scale(.82);opacity:0}7%{opacity:.95}50%{transform:translateY(-18px) rotate(-8deg) scale(.95)}92%{opacity:.95}100%{left:calc(100% + 16px);transform:translateY(-42px) rotate(-8deg) scale(1.02);opacity:0}}
+@keyframes batPeek{0%,58%,100%{right:-46px;opacity:0}62%{opacity:1}67%,82%{right:-12px;opacity:1}87%{right:-28px;opacity:.8}92%{right:-46px;opacity:0}}
+@media(prefers-reduced-motion:reduce){.mapPlane,.mapBatman{animation:none;display:none}}
 
 /* FOOTER PARTNERS */
 .footer{background:#08263c;color:#d8ecf8;padding:40px 0 105px}
@@ -327,6 +342,16 @@ dialog::backdrop{background:rgba(10,24,39,.62);backdrop-filter:blur(3px)}
     <div class="map">
   <div class="mapInner">
     <iframe title="Mapa Mundo Kids" loading="lazy" src="https://www.google.com/maps?q=Rua%20A.%20S.%20Cunha%20Bueno%20209%20Cerquilho%20SP&output=embed"></iframe>
+    <div class="mapFx" aria-hidden="true">
+      <span class="mapPlane p1">✈</span>
+      <span class="mapPlane p2">✈</span>
+      <div class="mapBatman">
+        <span class="batBubble">Eu sou o Batman</span>
+        <span class="batHead"></span>
+        <span class="batFace"></span>
+        <span class="batCape"></span>
+      </div>
+    </div>
     <div class="mapTint"></div>
     <span class="mapSpark s1"></span><span class="mapSpark s2"></span><span class="mapSpark s3"></span>
     <div class="mapTop">
@@ -510,6 +535,9 @@ function track(type,productId=null){fetch(API+"?action=event",{method:"POST",hea
 function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),1900)}
 function brl(v){return Number(v).toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
 function priceText(p){return p.price===null||p.price===undefined?"Valor a confirmar":brl(p.price)}
+function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
+function readProductCache(){try{const x=JSON.parse(localStorage.getItem("mk_products_cache")||"null");return Array.isArray(x?.products)?x.products:[]}catch{return[]}}
+function writeProductCache(list){try{localStorage.setItem("mk_products_cache",JSON.stringify({products:list,at:Date.now()}))}catch{}}
 function matches(p){const q=(p.name+" "+p.category+" "+p.label+" "+p.description).toLowerCase();return(filter==="all"||p.category.includes(filter))&&(!search||q.includes(search))}
 
 function render(){
@@ -521,7 +549,26 @@ function render(){
     '<div class="pactions"><button class="pbtn view" data-view="'+p.id+'">Ver detalhes</button><button class="pbtn add" data-add="'+p.id+'">Adicionar ao pedido</button><button class="pbtn wa" data-wa="'+p.id+'">Pedir no WhatsApp</button></div></div></article>').join("");
   if(!list.length) $("#products").innerHTML='<div style="grid-column:1/-1;padding:40px;text-align:center;color:#76899d">Nenhum brinquedo encontrado.</div>';
 }
-async function loadProducts(){try{const r=await fetch(API+"?action=products");const j=await r.json();products=j.products||[];render();renderCart()}catch(e){toast("Não foi possível carregar o catálogo agora.")}}
+async function loadProducts(){
+  const box=$("#products");
+  if(box)box.innerHTML='<div style="grid-column:1/-1;padding:38px;text-align:center;color:#76899d;font-weight:800">Carregando brinquedos...</div>';
+  let lastError=null;
+  for(let attempt=1;attempt<=3;attempt++){
+    try{
+      const r=await fetch(API+"?action=products",{cache:"no-store"});
+      if(!r.ok)throw new Error("products_http_"+r.status);
+      const j=await r.json();
+      if(!Array.isArray(j.products))throw new Error("products_invalid");
+      products=j.products;
+      writeProductCache(products);
+      render();renderCart();return;
+    }catch(e){lastError=e;if(attempt<3)await sleep(350*attempt)}
+  }
+  const cached=readProductCache();
+  if(cached.length){products=cached;render();renderCart();toast("Catálogo carregado. Atualizando em segundo plano.");return}
+  if(box)box.innerHTML='<div style="grid-column:1/-1;padding:34px;text-align:center;color:#76899d"><strong style="display:block;color:#14243e;margin-bottom:8px">Não consegui carregar os brinquedos agora.</strong><button class="pbtn view" data-retry-products>Tentar novamente</button></div>';
+  console.error(lastError);
+}
 function setFilter(f){filter=f;$all(".filterChip").forEach(b=>b.classList.toggle("on",b.dataset.filter===f));render();$("#brinquedos").scrollIntoView({behavior:"smooth"})}
 function openProduct(id){const p=products.find(x=>x.id===id);if(!p)return;selected=p;$("#mi").src=p.image_url;$("#mi").alt=p.name;$("#mt").textContent=p.name;$("#md").textContent=p.description;$("#ma").textContent=p.age;$("#mtag").textContent=p.label;$("#mp").textContent=priceText(p);$("#mw").href="https://wa.me/5515996395699?text="+encodeURIComponent("Olá Mundo Kids! Quero saber mais sobre "+p.name+".");track("product_view",p.id);$("#productModal").showModal()}
 function addCart(id,qty=1){const p=products.find(x=>x.id===id);if(!p)return;cart[id]=Math.min(20,(cart[id]||0)+qty);saveCart();renderCart();track("add_cart",id);toast(p.name+" adicionado ao pedido.")}
@@ -560,7 +607,7 @@ $("#toggleCats").onclick=()=>{const box=$("#allCats"),show=!box.classList.contai
 $all(".catCard").forEach(b=>b.onclick=()=>setFilter(b.dataset.cat));
 $all(".filterChip").forEach(b=>b.onclick=()=>setFilter(b.dataset.filter));
 
-$("#products").onclick=e=>{const v=e.target.closest("[data-view]"),a=e.target.closest("[data-add]"),w=e.target.closest("[data-wa]"),f=e.target.closest("[data-fav]");if(v)openProduct(v.dataset.view);if(a)addCart(a.dataset.add);if(w){const p=products.find(x=>x.id===w.dataset.wa);if(p){track("whatsapp",p.id);window.open("https://wa.me/5515996395699?text="+encodeURIComponent("Olá Mundo Kids! Quero saber mais sobre "+p.name+"."),"_blank")}}if(f)toggleFav(f.dataset.fav)};
+$("#products").onclick=e=>{const retry=e.target.closest("[data-retry-products]"),v=e.target.closest("[data-view]"),a=e.target.closest("[data-add]"),w=e.target.closest("[data-wa]"),f=e.target.closest("[data-fav]");if(retry){loadProducts();return}if(v)openProduct(v.dataset.view);if(a)addCart(a.dataset.add);if(w){const p=products.find(x=>x.id===w.dataset.wa);if(p){track("whatsapp",p.id);window.open("https://wa.me/5515996395699?text="+encodeURIComponent("Olá Mundo Kids! Quero saber mais sobre "+p.name+"."),"_blank")}}if(f)toggleFav(f.dataset.fav)};
 $("#addProduct").onclick=()=>{if(selected){addCart(selected.id);$("#productModal").close();openCart()}};
 
 $("#cartBtn").onclick=openCart;document.querySelectorAll("[data-cart-open]").forEach(b=>b.onclick=openCart);document.querySelectorAll("[data-track-open]").forEach(b=>b.onclick=openMyOrders);$("#accountMenuBtn").onclick=()=>{$("#nav").classList.remove("open");customerSession?openMyOrders():openAuth("account")};
