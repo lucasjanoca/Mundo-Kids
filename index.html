@@ -550,15 +550,20 @@ function priceText(p){return p.price===null||p.price===undefined?"Valor a confir
 function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
 function readProductCache(){try{const x=JSON.parse(localStorage.getItem("mk_products_cache")||"null");return Array.isArray(x?.products)?x.products:[]}catch{return[]}}
 function writeProductCache(list){try{localStorage.setItem("mk_products_cache",JSON.stringify({products:list,at:Date.now()}))}catch{}}
+function esc(v){return String(v??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]))}
+function safeImg(v){try{const u=new URL(String(v||""),location.href);return ["https:","http:"].includes(u.protocol)?u.href:""}catch{return""}}
 function matches(p){const q=(p.name+" "+p.category+" "+p.label+" "+p.description).toLowerCase();return(filter==="all"||p.category.includes(filter))&&(!search||q.includes(search))}
 
 function render(){
   const list=products.filter(matches);
-  $("#products").innerHTML=list.map(p=>'<article class="product">'+
-    '<div class="pmedia"><span class="badge">'+p.label+'</span><button class="fav '+(favorites.has(p.id)?"on":"")+'" data-fav="'+p.id+'" aria-label="'+(favorites.has(p.id)?"Remover dos favoritos":"Salvar nos favoritos")+'" aria-pressed="'+favorites.has(p.id)+'">'+(favorites.has(p.id)?"♥":"♡")+'</button><img loading="lazy" src="'+p.image_url+'" alt="'+p.name+'"></div>'+
-    '<div class="pbody"><div class="meta"><span>'+p.age+'</span><span>'+p.label+'</span></div><h3>'+p.name+'</h3><p>'+p.description+'</p>'+
-    '<span class="price '+(p.price==null?"pending":"")+'">'+priceText(p)+'</span>'+
-    '<div class="pactions"><button class="pbtn view" data-view="'+p.id+'">Ver detalhes</button><button class="pbtn add" data-add="'+p.id+'">Adicionar ao pedido</button><button class="pbtn wa" data-wa="'+p.id+'">Pedir no WhatsApp</button></div></div></article>').join("");
+  $("#products").innerHTML=list.map(p=>{
+    const id=esc(p.id),name=esc(p.name),label=esc(p.label),age=esc(p.age),desc=esc(p.description),img=esc(safeImg(p.image_url)),saved=favorites.has(p.id);
+    return '<article class="product">'+
+      '<div class="pmedia"><span class="badge">'+label+'</span><button class="fav '+(saved?"on":"")+'" data-fav="'+id+'" aria-label="'+(saved?"Remover dos favoritos":"Salvar nos favoritos")+'" aria-pressed="'+saved+'">'+(saved?"♥":"♡")+'</button><img loading="lazy" src="'+img+'" alt="'+name+'"></div>'+
+      '<div class="pbody"><div class="meta"><span>'+age+'</span><span>'+label+'</span></div><h3>'+name+'</h3><p>'+desc+'</p>'+
+      '<span class="price '+(p.price==null?"pending":"")+'">'+esc(priceText(p))+'</span>'+
+      '<div class="pactions"><button class="pbtn view" data-view="'+id+'">Ver detalhes</button><button class="pbtn add" data-add="'+id+'">Adicionar ao pedido</button><button class="pbtn wa" data-wa="'+id+'">Pedir no WhatsApp</button></div></div></article>';
+  }).join("");
   if(!list.length) $("#products").innerHTML='<div style="grid-column:1/-1;padding:40px;text-align:center;color:#76899d">Nenhum brinquedo encontrado.</div>';
 }
 async function loadProducts(){
@@ -599,7 +604,7 @@ function renderCart(){
   const entries=Object.entries(cart).filter(([id,q])=>q>0&&products.some(p=>p.id===id));
   if(!entries.length){$("#cartList").innerHTML='<div style="text-align:center;padding:34px;color:#76899d">Seu pedido está vazio.</div>';$("#checkoutOpen").disabled=true;$("#cartTotal").textContent="A confirmar";return}
   $("#checkoutOpen").disabled=false;let total=0,pending=false;
-  $("#cartList").innerHTML=entries.map(([id,q])=>{const p=products.find(x=>x.id===id);if(p.price==null)pending=true;else total+=Number(p.price)*q;return '<div class="cartItem"><img src="'+p.image_url+'" alt=""><div><strong>'+p.name+'</strong><small>'+priceText(p)+'</small><button class="remove" data-remove="'+id+'">Remover</button></div><div class="qty"><button data-minus="'+id+'">−</button><b>'+q+'</b><button data-plus="'+id+'">+</button></div></div>'}).join("");
+  $("#cartList").innerHTML=entries.map(([id,q])=>{const p=products.find(x=>x.id===id);if(p.price==null)pending=true;else total+=Number(p.price)*q;return '<div class="cartItem"><img src="'+esc(safeImg(p.image_url))+'" alt="'+esc(p.name)+'"><div><strong>'+esc(p.name)+'</strong><small>'+esc(priceText(p))+'</small><button class="remove" data-remove="'+esc(id)+'">Remover</button></div><div class="qty"><button data-minus="'+esc(id)+'">−</button><b>'+Number(q)+'</b><button data-plus="'+esc(id)+'">+</button></div></div>'}).join("");
   $("#cartTotal").textContent=pending?(total>0?brl(total)+" + itens a confirmar":"Valor a confirmar"):brl(total);
 }
 function openCart(){checkoutStep=1;showCheckoutStep(1);$("#checkoutForm").classList.add("hidden");$("#cartStage").classList.remove("hidden");$("#orderSuccess").classList.remove("show");renderCart();if(!$("#cartModal").open)$("#cartModal").showModal()}
@@ -607,14 +612,14 @@ async function startCheckout(){if(!(await requireCustomer("checkout")))return;aw
 function showCheckoutStep(step){checkoutStep=step;$all("[data-step]").forEach(s=>s.classList.toggle("on",Number(s.dataset.step)===step));$all("[data-step-dot]").forEach(s=>s.classList.toggle("on",Number(s.dataset.stepDot)<=step));if(step===3)renderSummary()}
 function renderSummary(){
   const entries=Object.entries(cart).filter(([id,q])=>q>0&&products.some(p=>p.id===id));let total=0,pending=false;
-  $("#summaryMeta").innerHTML='<b>'+$("#cName").value+'</b><br>'+$("#cPhone").value+'<br>Retirada: '+($("#cDate").value||"a combinar")+' '+($("#cTime").value||"")+'<br>Pagamento: '+$("#cPayment").value;
-  $("#summaryList").innerHTML=entries.map(([id,q])=>{const p=products.find(x=>x.id===id);if(p.price==null)pending=true;else total+=Number(p.price)*q;return '<div class="summaryItem"><span>'+q+'× '+p.name+'</span><b>'+priceText(p)+'</b></div>'}).join("");
+  $("#summaryMeta").innerHTML='<b>'+esc($("#cName").value)+'</b><br>'+esc($("#cPhone").value)+'<br>Retirada: '+esc($("#cDate").value||"a combinar")+' '+esc($("#cTime").value||"")+'<br>Pagamento: '+esc($("#cPayment").value);
+  $("#summaryList").innerHTML=entries.map(([id,q])=>{const p=products.find(x=>x.id===id);if(p.price==null)pending=true;else total+=Number(p.price)*q;return '<div class="summaryItem"><span>'+Number(q)+'× '+esc(p.name)+'</span><b>'+esc(priceText(p))+'</b></div>'}).join("");
   $("#summaryTotal").textContent=pending?(total>0?brl(total)+" + itens a confirmar":"Valor a confirmar"):brl(total);
 }
 function validateStep1(){if($("#cName").value.trim().length<2){toast("Informe seu nome.");return false}if($("#cPhone").value.replace(/\D/g,"").length<10){toast("Informe um WhatsApp válido.");return false}return true}
 async function openMyOrders(){ $("#nav").classList.remove("open"); if(!(await requireCustomer("track")))return;await loadAccount();if($("#cartModal").open)$("#cartModal").close();$("#trackResult").innerHTML="";$("#myOrders").innerHTML='<div style="padding:24px;text-align:center;color:#76899d">Carregando seus pedidos...</div>';if(!$("#trackModal").open)$("#trackModal").showModal();try{const r=await fetch(API+"?action=my_orders",{headers:{...authHeader()}});const j=await r.json();if(!r.ok)throw new Error();myOrders=j.orders||[];renderMyOrders()}catch{$("#myOrders").innerHTML='<div style="padding:24px;text-align:center;color:#b7334c;font-weight:900">Não foi possível carregar seus pedidos.</div>'}}
-function renderMyOrders(){if(!myOrders.length){$("#myOrders").innerHTML='<div style="padding:30px;text-align:center;color:#76899d">Você ainda não fez nenhum pedido.</div>';return}$("#myOrders").innerHTML=myOrders.map(o=>'<article class="myOrder"><div class="myOrderHead"><div><code>'+o.order_code+'</code><div class="myOrderMeta">'+new Date(o.created_at).toLocaleString("pt-BR")+' • '+(o.items||[]).reduce((s,i)=>s+i.qty,0)+' item(ns)</div></div><span class="statusPill">'+labels[o.status]+'</span></div><button data-my-order="'+o.id+'">Ver andamento</button></article>').join("")}
-function renderTracking(o){const current=flow.indexOf(o.status),cancel=o.status==="cancelled";const items=(o.items||[]).map(i=>'<div>'+i.qty+'× '+i.product_name+'</div>').join("");const tl=flow.map((s,i)=>'<li class="'+(cancel?"":i<current?"done":i===current?"current":"")+'"><strong>'+labels[s]+'</strong></li>').join("");$("#trackResult").innerHTML='<div class="orderHead"><strong>'+o.order_code+' • '+labels[o.status]+'</strong><span>'+o.customer_name+' • '+new Date(o.created_at).toLocaleString("pt-BR")+'</span><div class="orderItems">'+items+'</div></div>'+(cancel?'<p style="color:#b7334c;font-weight:900">Pedido cancelado.</p>':'<ul class="timeline">'+tl+'</ul>')}
+function renderMyOrders(){if(!myOrders.length){$("#myOrders").innerHTML='<div style="padding:30px;text-align:center;color:#76899d">Você ainda não fez nenhum pedido.</div>';return}$("#myOrders").innerHTML=myOrders.map(o=>'<article class="myOrder"><div class="myOrderHead"><div><code>'+esc(o.order_code)+'</code><div class="myOrderMeta">'+esc(new Date(o.created_at).toLocaleString("pt-BR"))+' • '+(o.items||[]).reduce((s,i)=>s+Number(i.qty||0),0)+' item(ns)</div></div><span class="statusPill">'+esc(labels[o.status]||o.status)+'</span></div><button data-my-order="'+esc(o.id)+'">Ver andamento</button></article>').join("")}
+function renderTracking(o){const current=flow.indexOf(o.status),cancel=o.status==="cancelled";const items=(o.items||[]).map(i=>'<div>'+Number(i.qty||0)+'× '+esc(i.product_name)+'</div>').join("");const tl=flow.map((s,i)=>'<li class="'+(cancel?"":i<current?"done":i===current?"current":"")+'"><strong>'+esc(labels[s])+'</strong></li>').join("");$("#trackResult").innerHTML='<div class="orderHead"><strong>'+esc(o.order_code)+' • '+esc(labels[o.status]||o.status)+'</strong><span>'+esc(o.customer_name)+' • '+esc(new Date(o.created_at).toLocaleString("pt-BR"))+'</span><div class="orderItems">'+items+'</div></div>'+(cancel?'<p style="color:#b7334c;font-weight:900">Pedido cancelado.</p>':'<ul class="timeline">'+tl+'</ul>')}
 $("#year").textContent=new Date().getFullYear();updateCartCount();loadProducts();track("page_view");
 
 $("#menu").onclick=e=>{e.stopPropagation();$("#nav").classList.toggle("open")};
