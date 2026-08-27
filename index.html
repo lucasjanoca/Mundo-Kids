@@ -109,16 +109,22 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}
 .giftBox select:focus,.checkout input:focus,.checkout select:focus,.checkout textarea:focus,.trackForm input:focus{border-color:#8ab7ff;box-shadow:0 0 0 3px rgba(7,94,255,.08)}
 .giftResult{display:none;margin-top:14px}.giftResult.show{display:block}.giftCta{width:100%;display:flex;align-items:center;justify-content:center;gap:9px;padding:14px 16px;border-radius:14px;background:linear-gradient(135deg,#20bf62,#15964a);color:#fff!important;font-weight:900;box-shadow:0 12px 26px rgba(21,150,74,.20)}.giftCta:hover{transform:translateY(-1px)}
 .storeInfo{display:grid;gap:6px;margin:14px 0}.storeInfo p{margin:0}
-.map{position:relative;overflow:hidden;border-radius:28px;min-height:390px;box-shadow:0 22px 55px rgba(17,65,113,.16);border:1px solid #cfe3f0;background:linear-gradient(135deg,#eaf8ff,#fff3f8)}
-.map iframe{width:100%;height:100%;min-height:390px;border:0;display:block;filter:saturate(1.08) contrast(.98)}
-.map:after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:28px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.72),inset 0 -80px 90px rgba(8,38,60,.08)}
-.mapTop{position:absolute;z-index:3;top:12px;left:12px;right:12px;display:flex;align-items:center;justify-content:space-between;gap:8px;pointer-events:none}
-.mapBrand{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:15px;background:rgba(255,255,255,.96);border:1px solid rgba(207,227,240,.95);box-shadow:0 10px 24px rgba(17,65,113,.13);backdrop-filter:blur(9px)}
-.mapBrand strong{font:800 1rem "Baloo 2";color:var(--ink);line-height:1}.mapBrand small{display:block;margin-top:2px;color:#6e8498;font-size:.62rem;font-weight:900;text-transform:uppercase;letter-spacing:.6px}
-.mapDot{width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--orange));box-shadow:0 0 0 5px rgba(245,46,152,.12)}
-.mapTag{padding:8px 10px;border-radius:13px;background:rgba(255,255,255,.94);border:1px solid #dce7ef;color:#31506a;font-size:.68rem;font-weight:900;box-shadow:0 8px 20px rgba(17,65,113,.10)}
-.mapBottom{position:absolute;z-index:3;left:12px;right:12px;bottom:12px;display:flex;justify-content:flex-end;pointer-events:none}
-.mapRoute{pointer-events:auto;display:inline-flex;align-items:center;gap:8px;padding:11px 14px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;font-weight:900;box-shadow:0 12px 26px rgba(7,94,255,.22)}
+.map{position:relative;overflow:hidden;border-radius:30px;min-height:410px;padding:8px;background:linear-gradient(135deg,var(--pink) 0 10%,var(--orange) 10% 20%,var(--yellow) 20% 30%,var(--green) 30% 40%,var(--cyan) 40% 55%,var(--blue) 55% 72%,var(--purple) 72% 100%);box-shadow:0 24px 60px rgba(17,65,113,.18)}
+.mapInner{position:relative;overflow:hidden;min-height:394px;border-radius:23px;background:#eaf7ff}
+.map iframe{width:100%;height:100%;min-height:394px;border:0;display:block;filter:saturate(.88) contrast(.98) brightness(1.03)}
+.mapTint{position:absolute;inset:0;pointer-events:none;background:linear-gradient(145deg,rgba(7,94,255,.10),transparent 36%,rgba(245,46,152,.08) 72%,rgba(255,154,46,.09));mix-blend-mode:multiply}
+.mapSpark{position:absolute;z-index:2;border-radius:50%;pointer-events:none;box-shadow:0 6px 16px rgba(17,65,113,.12)}
+.mapSpark.s1{width:22px;height:22px;right:18px;top:92px;background:var(--yellow)}
+.mapSpark.s2{width:16px;height:16px;right:47px;top:124px;background:var(--pink)}
+.mapSpark.s3{width:13px;height:13px;left:18px;bottom:88px;background:var(--cyan)}
+.mapTop{position:absolute;z-index:4;top:17px;left:17px;right:17px;display:flex;align-items:center;justify-content:space-between;gap:8px;pointer-events:none}
+.mapBrand{display:flex;align-items:center;gap:10px;padding:10px 13px;border-radius:16px;background:rgba(255,255,255,.97);border:1px solid rgba(207,227,240,.95);box-shadow:0 12px 26px rgba(17,65,113,.14);backdrop-filter:blur(10px)}
+.mapBrand strong{font:800 1.06rem "Baloo 2";color:var(--ink);line-height:1}.mapBrand small{display:block;margin-top:2px;color:#6e8498;font-size:.62rem;font-weight:900;text-transform:uppercase;letter-spacing:.7px}
+.mapPin{width:30px;height:30px;border-radius:12px 12px 12px 4px;transform:rotate(-45deg);background:linear-gradient(135deg,var(--pink),var(--orange));display:grid;place-items:center;box-shadow:0 7px 16px rgba(245,46,152,.24)}
+.mapPin:after{content:"★";transform:rotate(45deg);color:#fff;font-size:.72rem}
+.mapTag{padding:9px 11px;border-radius:14px;background:rgba(255,255,255,.96);border:1px solid #dce7ef;color:#31506a;font-size:.68rem;font-weight:900;box-shadow:0 9px 22px rgba(17,65,113,.11)}
+.mapBottom{position:absolute;z-index:4;left:17px;right:17px;bottom:17px;display:flex;justify-content:flex-end;pointer-events:none}
+.mapRoute{pointer-events:auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border-radius:15px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;font-weight:900;box-shadow:0 13px 28px rgba(7,94,255,.25);border:2px solid rgba(255,255,255,.85)}
 .mapRoute:hover{transform:translateY(-1px)}
 
 /* FOOTER PARTNERS */
@@ -319,12 +325,16 @@ dialog::backdrop{background:rgba(10,24,39,.62);backdrop-filter:blur(3px)}
       </div>
     </article>
     <div class="map">
-  <iframe title="Mapa Mundo Kids" loading="lazy" src="https://www.google.com/maps?q=Rua%20A.%20S.%20Cunha%20Bueno%20209%20Cerquilho%20SP&output=embed"></iframe>
-  <div class="mapTop">
-    <div class="mapBrand"><span class="mapDot"></span><div><strong>Mundo Kids</strong><small>Centro • Cerquilho/SP</small></div></div>
-    <span class="mapTag">Loja física</span>
+  <div class="mapInner">
+    <iframe title="Mapa Mundo Kids" loading="lazy" src="https://www.google.com/maps?q=Rua%20A.%20S.%20Cunha%20Bueno%20209%20Cerquilho%20SP&output=embed"></iframe>
+    <div class="mapTint"></div>
+    <span class="mapSpark s1"></span><span class="mapSpark s2"></span><span class="mapSpark s3"></span>
+    <div class="mapTop">
+      <div class="mapBrand"><span class="mapPin"></span><div><strong>Mundo Kids</strong><small>Centro • Cerquilho/SP</small></div></div>
+      <span class="mapTag">Loja física</span>
+    </div>
+    <div class="mapBottom"><a class="mapRoute" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Rua+A.+S.+Cunha+Bueno,+209,+Cerquilho,+SP">Abrir rota no Maps ↗</a></div>
   </div>
-  <div class="mapBottom"><a class="mapRoute" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Rua+A.+S.+Cunha+Bueno,+209,+Cerquilho,+SP">Abrir rota no Maps ↗</a></div>
 </div>
   </div>
 </section>
@@ -346,7 +356,7 @@ dialog::backdrop{background:rgba(10,24,39,.62);backdrop-filter:blur(3px)}
       <img src="https://infotech-io.com.br/assets/brand/logo.webp" alt="InfoTech.io">
       <small>Desenvolvimento</small>
     </a>
-    <a class="partner plexo" href="https://plexoplace.com.br/" target="_blank" rel="noopener" aria-label="Abrir site da Plexo">
+    <a class="partner plexo" href="https://www.tiktok.com/@plexoplace?_r=1&_t=ZS-99E1bmV05YI" target="_blank" rel="noopener" aria-label="Abrir site da Plexo">
       <span class="plexoBrand">
         <svg viewBox="0 0 100 100" role="img" aria-label="Plexo">
           <path d="M50 7 L62 37 L93 50 L62 63 L50 93 L38 63 L7 50 L38 37 Z" fill="none" stroke="#18d7ff" stroke-width="7" stroke-linejoin="round"/>
