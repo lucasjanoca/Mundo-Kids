@@ -109,7 +109,17 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}
 .giftBox select:focus,.checkout input:focus,.checkout select:focus,.checkout textarea:focus,.trackForm input:focus{border-color:#8ab7ff;box-shadow:0 0 0 3px rgba(7,94,255,.08)}
 .giftResult{display:none;margin-top:14px}.giftResult.show{display:block}.giftCta{width:100%;display:flex;align-items:center;justify-content:center;gap:9px;padding:14px 16px;border-radius:14px;background:linear-gradient(135deg,#20bf62,#15964a);color:#fff!important;font-weight:900;box-shadow:0 12px 26px rgba(21,150,74,.20)}.giftCta:hover{transform:translateY(-1px)}
 .storeInfo{display:grid;gap:6px;margin:14px 0}.storeInfo p{margin:0}
-.map{overflow:hidden;border-radius:24px;min-height:360px;box-shadow:var(--shadow)}.map iframe{width:100%;height:100%;min-height:360px;border:0}
+.map{position:relative;overflow:hidden;border-radius:28px;min-height:390px;box-shadow:0 22px 55px rgba(17,65,113,.16);border:1px solid #cfe3f0;background:linear-gradient(135deg,#eaf8ff,#fff3f8)}
+.map iframe{width:100%;height:100%;min-height:390px;border:0;display:block;filter:saturate(1.08) contrast(.98)}
+.map:after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:28px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.72),inset 0 -80px 90px rgba(8,38,60,.08)}
+.mapTop{position:absolute;z-index:3;top:12px;left:12px;right:12px;display:flex;align-items:center;justify-content:space-between;gap:8px;pointer-events:none}
+.mapBrand{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:15px;background:rgba(255,255,255,.96);border:1px solid rgba(207,227,240,.95);box-shadow:0 10px 24px rgba(17,65,113,.13);backdrop-filter:blur(9px)}
+.mapBrand strong{font:800 1rem "Baloo 2";color:var(--ink);line-height:1}.mapBrand small{display:block;margin-top:2px;color:#6e8498;font-size:.62rem;font-weight:900;text-transform:uppercase;letter-spacing:.6px}
+.mapDot{width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--orange));box-shadow:0 0 0 5px rgba(245,46,152,.12)}
+.mapTag{padding:8px 10px;border-radius:13px;background:rgba(255,255,255,.94);border:1px solid #dce7ef;color:#31506a;font-size:.68rem;font-weight:900;box-shadow:0 8px 20px rgba(17,65,113,.10)}
+.mapBottom{position:absolute;z-index:3;left:12px;right:12px;bottom:12px;display:flex;justify-content:flex-end;pointer-events:none}
+.mapRoute{pointer-events:auto;display:inline-flex;align-items:center;gap:8px;padding:11px 14px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;font-weight:900;box-shadow:0 12px 26px rgba(7,94,255,.22)}
+.mapRoute:hover{transform:translateY(-1px)}
 
 /* FOOTER PARTNERS */
 .footer{background:#08263c;color:#d8ecf8;padding:40px 0 105px}
@@ -159,7 +169,7 @@ dialog::backdrop{background:rgba(10,24,39,.62);backdrop-filter:blur(3px)}
 .timeline{list-style:none;margin:15px 0 0;padding:0}.timeline li{position:relative;padding:0 0 18px 31px;color:var(--muted)}.timeline li:before{content:"";position:absolute;left:8px;top:3px;width:14px;height:14px;border-radius:50%;background:#d3dfeb;border:3px solid #fff;box-shadow:0 0 0 2px #d3dfeb}.timeline li:after{content:"";position:absolute;left:14px;top:20px;bottom:0;width:2px;background:#d3dfeb}.timeline li:last-child:after{display:none}.timeline li.done{color:var(--ink)}.timeline li.done:before{background:var(--green);box-shadow:0 0 0 2px var(--green)}.timeline li.current{font-weight:900;color:var(--blue)}.timeline li.current:before{background:var(--blue);box-shadow:0 0 0 2px var(--blue)}
 
 @media(max-width:980px){
-  .heroContent{width:58%}.heroProduct{width:48%}
+  .heroContent{width:58%}
   .catGrid,.allCats{grid-template-columns:repeat(3,1fr)}
   .products{grid-template-columns:repeat(3,1fr)}
   .giftGrid,.storeGrid{grid-template-columns:1fr}
@@ -308,7 +318,14 @@ dialog::backdrop{background:rgba(10,24,39,.62);backdrop-filter:blur(3px)}
         <a class="btn btnGhost" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Rua+A.+S.+Cunha+Bueno,+209,+Cerquilho,+SP">Como chegar</a>
       </div>
     </article>
-    <div class="map"><iframe title="Mapa Mundo Kids" loading="lazy" src="https://www.google.com/maps?q=Rua%20A.%20S.%20Cunha%20Bueno%20209%20Cerquilho%20SP&output=embed"></iframe></div>
+    <div class="map">
+  <iframe title="Mapa Mundo Kids" loading="lazy" src="https://www.google.com/maps?q=Rua%20A.%20S.%20Cunha%20Bueno%20209%20Cerquilho%20SP&output=embed"></iframe>
+  <div class="mapTop">
+    <div class="mapBrand"><span class="mapDot"></span><div><strong>Mundo Kids</strong><small>Centro • Cerquilho/SP</small></div></div>
+    <span class="mapTag">Loja física</span>
+  </div>
+  <div class="mapBottom"><a class="mapRoute" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Rua+A.+S.+Cunha+Bueno,+209,+Cerquilho,+SP">Abrir rota no Maps ↗</a></div>
+</div>
   </div>
 </section>
 </main>
