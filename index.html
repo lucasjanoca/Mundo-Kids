@@ -44,12 +44,12 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}
 
 /* HERO */
 .hero{padding:26px 0 18px;background:linear-gradient(180deg,#f7fbff,#fff)}
-.heroBanner{position:relative;min-height:430px;overflow:hidden;border-radius:30px;background:
+.heroBanner{position:relative;min-height:340px;overflow:hidden;border-radius:30px;background:
  radial-gradient(circle at 78% 20%,rgba(255,214,71,.75),transparent 24%),
  radial-gradient(circle at 92% 73%,rgba(245,46,152,.38),transparent 28%),
  linear-gradient(135deg,#ecf7ff 0%,#f9fcff 47%,#fff2f8 100%);
  border:1px solid #e1edf5;box-shadow:var(--shadow)}
-.heroContent{position:relative;z-index:3;width:53%;padding:48px 18px 48px 42px}
+.heroContent{position:relative;z-index:3;width:min(760px,100%);padding:48px 42px}
 .kicker{display:inline-flex;padding:7px 12px;border-radius:999px;background:#fff;border:1px solid #cfe7f7;color:#0d74a9;font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:.3px}
 .hero h1,.sectionHead h2,.giftIntro h2,.store h2{font-family:"Baloo 2";color:var(--ink);line-height:1.02;letter-spacing:-1px}
 .hero h1{font-size:clamp(2.6rem,5vw,4.65rem);margin:12px 0 12px}
@@ -59,10 +59,6 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border-radius:14px;font-weight:900}
 .btnPrimary{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;box-shadow:0 12px 25px rgba(4,81,224,.18)}
 .btnGhost{background:#fff;border:1px solid var(--line);color:var(--ink)}
-.heroProduct{position:absolute;right:-1%;bottom:-3%;width:49%;height:97%;z-index:2;display:flex;align-items:flex-end;justify-content:center}
-.heroProduct:before{content:"";position:absolute;width:88%;aspect-ratio:1;border-radius:50%;background:linear-gradient(135deg,#d8f6ff,#ffe1f0);right:2%;bottom:2%;filter:blur(.2px)}
-.heroProduct img{position:relative;z-index:2;width:95%;height:95%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 24px 24px rgba(16,54,91,.15))}
-.heroDots{position:absolute;bottom:16px;left:42px;z-index:4;display:flex;gap:6px}.heroDots i{width:7px;height:7px;border-radius:50%;background:#c9d9e6}.heroDots i:first-child{width:24px;border-radius:99px;background:var(--pink)}
 
 /* SECTIONS */
 .sec{padding:46px 0}
@@ -111,7 +107,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}
 .giftBox label,.checkout label,.trackForm label{display:block;margin:10px 0 5px;font-weight:900;color:#2d4862;font-size:.83rem}
 .giftBox select,.checkout input,.checkout select,.checkout textarea,.trackForm input{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fcfdff;outline:0}
 .giftBox select:focus,.checkout input:focus,.checkout select:focus,.checkout textarea:focus,.trackForm input:focus{border-color:#8ab7ff;box-shadow:0 0 0 3px rgba(7,94,255,.08)}
-.giftResult{display:none;margin-top:12px;padding:13px;border-radius:14px;background:#eef6ff;color:#1c5f89}.giftResult.show{display:block}
+.giftResult{display:none;margin-top:14px}.giftResult.show{display:block}.giftCta{width:100%;display:flex;align-items:center;justify-content:center;gap:9px;padding:14px 16px;border-radius:14px;background:linear-gradient(135deg,#20bf62,#15964a);color:#fff!important;font-weight:900;box-shadow:0 12px 26px rgba(21,150,74,.20)}.giftCta:hover{transform:translateY(-1px)}
 .storeInfo{display:grid;gap:6px;margin:14px 0}.storeInfo p{margin:0}
 .map{overflow:hidden;border-radius:24px;min-height:360px;box-shadow:var(--shadow)}.map iframe{width:100%;height:100%;min-height:360px;border:0}
 
@@ -159,8 +155,7 @@ dialog::backdrop{background:rgba(10,24,39,.62);backdrop-filter:blur(3px)}
 .stepActions{display:flex;gap:8px;margin-top:15px}.stepActions .btn{flex:1}
 .summaryList{display:grid;gap:7px;margin:12px 0}.summaryItem{display:flex;justify-content:space-between;gap:12px;padding:9px;background:#f7fbff;border:1px solid var(--line);border-radius:11px;font-size:.8rem}.summaryMeta{padding:10px;border-radius:12px;background:#f8fbfe;border:1px solid var(--line);font-size:.8rem}.summaryMeta b{color:var(--ink)}
 .successBox{display:none;padding:20px;border-radius:18px;background:#eefbf1;color:#176b32;text-align:center;margin:auto 0}.successBox.show{display:block}.successBox code{display:block;font:800 1.5rem "Baloo 2";color:#123f2a;margin:8px 0}
-.trackForm{display:grid;grid-template-columns:1fr 1fr auto;gap:9px;align-items:end}.trackForm button{padding:12px 16px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;font-weight:900}
-.trackResult{margin-top:15px}.orderHead{padding:14px;border-radius:15px;background:#f7fbff;border:1px solid var(--line)}.orderHead strong{display:block;color:var(--ink);font-size:1.05rem}.orderItems{margin-top:11px;padding-top:10px;border-top:1px solid var(--line);display:grid;gap:4px;font-size:.83rem}
+.authCard{text-align:center;padding:6px 2px}.authLogo{font:800 1.6rem "Baloo 2";color:var(--ink);margin-bottom:4px}.authLead{margin:0 0 16px;color:var(--muted)}.authTabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:5px;border-radius:14px;background:#f1f6fa;margin:12px 0}.authTab{padding:9px;border-radius:10px;background:transparent;color:#60768b;font-weight:900}.authTab.on{background:#fff;color:var(--blue);box-shadow:0 4px 12px rgba(17,65,113,.08)}.googleBtn{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:13px;border-radius:13px;background:#fff;border:1px solid var(--line);color:var(--ink);font-weight:900}.googleG{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#fff;border:1px solid #e4e9ee;font-weight:900;color:#4285f4}.authDivider{display:flex;align-items:center;gap:10px;margin:14px 0;color:#8b9baa;font-size:.75rem}.authDivider:before,.authDivider:after{content:"";height:1px;flex:1;background:var(--line)}.authForm{display:grid;gap:9px;text-align:left}.authForm label{font-size:.78rem;font-weight:900;color:#2d4862}.authForm input{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;outline:0}.authMsg{min-height:20px;margin:9px 0 0;font-size:.78rem;font-weight:800}.authMsg.err{color:#b7334c}.authMsg.ok{color:#168647}.accountBar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 12px;border-radius:13px;background:#f6faff;border:1px solid var(--line);margin-bottom:12px}.accountBar strong{display:block;color:var(--ink)}.accountBar small{display:block;color:var(--muted)}.accountBar button{background:none;color:#b7334c;font-weight:900}.myOrders{display:grid;gap:10px}.myOrder{border:1px solid var(--line);border-radius:16px;padding:13px;background:#fff}.myOrderHead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.myOrder code{font-weight:900;color:var(--blue)}.statusPill{padding:5px 9px;border-radius:999px;background:#eef6ff;color:var(--blue);font-size:.68rem;font-weight:900}.myOrderMeta{font-size:.76rem;color:var(--muted);margin-top:4px}.myOrder button{margin-top:9px;padding:9px 12px;border-radius:10px;background:#f0f6ff;color:var(--blue);font-weight:900}.trackResult{margin-top:15px}.orderHead{padding:14px;border-radius:15px;background:#f7fbff;border:1px solid var(--line)}.orderHead strong{display:block;color:var(--ink);font-size:1.05rem}.orderItems{margin-top:11px;padding-top:10px;border-top:1px solid var(--line);display:grid;gap:4px;font-size:.83rem}
 .timeline{list-style:none;margin:15px 0 0;padding:0}.timeline li{position:relative;padding:0 0 18px 31px;color:var(--muted)}.timeline li:before{content:"";position:absolute;left:8px;top:3px;width:14px;height:14px;border-radius:50%;background:#d3dfeb;border:3px solid #fff;box-shadow:0 0 0 2px #d3dfeb}.timeline li:after{content:"";position:absolute;left:14px;top:20px;bottom:0;width:2px;background:#d3dfeb}.timeline li:last-child:after{display:none}.timeline li.done{color:var(--ink)}.timeline li.done:before{background:var(--green);box-shadow:0 0 0 2px var(--green)}.timeline li.current{font-weight:900;color:var(--blue)}.timeline li.current:before{background:var(--blue);box-shadow:0 0 0 2px var(--blue)}
 
 @media(max-width:980px){
@@ -177,10 +172,8 @@ dialog::backdrop{background:rgba(10,24,39,.62);backdrop-filter:blur(3px)}
   .logo b{font-size:1.63rem}.logo small{font-size:.5rem}
   .actions{justify-self:end}.icon{width:47px;height:47px;border-radius:15px}
   .navWrap{top:66px}
-  .hero{padding-top:14px}.heroBanner{min-height:440px;border-radius:24px}
-  .heroContent{width:100%;padding:28px 20px 210px}.hero h1{font-size:2.32rem}.hero p{font-size:.96rem}
-  .heroProduct{right:0;bottom:-2%;width:100%;height:52%;justify-content:flex-end}.heroProduct:before{width:62%;right:2%;bottom:0}.heroProduct img{width:70%;height:100%;object-position:right bottom}
-  .heroDots{left:20px;bottom:14px}
+  .hero{padding-top:14px}.heroBanner{min-height:auto;border-radius:24px}
+  .heroContent{width:100%;padding:30px 20px}.hero h1{font-size:2.32rem}.hero p{font-size:.96rem}
   .sec{padding:39px 0}.sectionHead{align-items:flex-start;flex-direction:column;gap:7px}.sectionHead h2{font-size:1.95rem}
   .catGrid,.allCats{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.catCard{border-radius:16px}.catCard b{padding:8px 3px;font-size:.72rem}
   .catalogTools{display:grid;grid-template-columns:repeat(2,1fr)}.filterChip{font-size:.78rem}
@@ -192,7 +185,6 @@ dialog::backdrop{background:rgba(10,24,39,.62);backdrop-filter:blur(3px)}
   .modalGrid{grid-template-columns:1fr}
   #cartModal{width:100%;max-width:100%;border-radius:0}
   .checkoutGrid{grid-template-columns:1fr}.checkoutGrid .wide{grid-column:auto}
-  .trackForm{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -217,6 +209,7 @@ dialog::backdrop{background:rgba(10,24,39,.62);backdrop-filter:blur(3px)}
     <a href="#brinquedos">Brinquedos</a>
     <a href="#presentes">Encontrar presente</a>
     <button type="button" data-track-open>Acompanhar pedido</button>
+    <button type="button" id="accountMenuBtn">Minha conta</button>
     <a href="#loja">Loja física</a>
   </nav>
 </header>
@@ -234,11 +227,7 @@ dialog::backdrop{background:rgba(10,24,39,.62);backdrop-filter:blur(3px)}
           <button class="btn btnGhost" type="button" data-track-open>Acompanhar pedido</button>
         </div>
       </div>
-      <div class="heroProduct">
-        <img src="https://images.mattel.net/image/upload/w_646%2Cf_auto%2Cc_scale/shop-us-prod/files/vrx3crutfihlpgknv9mx.png" alt="Criança brincando com Imaginext Star Wars Vader-Bot">
-      </div>
-      <div class="heroDots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-    </article>
+</article>
   </div>
 </section>
 
@@ -383,6 +372,27 @@ dialog::backdrop{background:rgba(10,24,39,.62);backdrop-filter:blur(3px)}
   </div>
 </dialog>
 
+<dialog id="authModal">
+  <div class="modal">
+    <button class="close" data-close="authModal">×</button>
+    <div class="authCard">
+      <div class="authLogo"><span class="m">M</span><span class="u">U</span><span class="n">N</span><span class="d">D</span><span class="o">O</span> <span class="kids">KIDS</span></div>
+      <h2 class="trackTitle">Entre para continuar</h2>
+      <p class="authLead">Sua conta guarda seus pedidos e deixa o acompanhamento muito mais simples.</p>
+      <button class="googleBtn" id="googleLogin" type="button"><span class="googleG">G</span> Continuar com Google</button>
+      <div class="authDivider">ou use seu e-mail / Gmail</div>
+      <div class="authTabs"><button class="authTab on" type="button" data-auth-mode="login">Entrar</button><button class="authTab" type="button" data-auth-mode="signup">Criar conta</button></div>
+      <form class="authForm" id="authForm">
+        <div id="signupNameWrap" class="hidden"><label>Seu nome</label><input id="authName" autocomplete="name"></div>
+        <label>E-mail / Gmail</label><input id="authEmail" type="email" autocomplete="email" required>
+        <label>Senha</label><input id="authPassword" type="password" autocomplete="current-password" minlength="6" required>
+        <button class="btn btnPrimary" id="authSubmit">Entrar</button>
+        <p class="authMsg" id="authMsg"></p>
+      </form>
+    </div>
+  </div>
+</dialog>
+
 <dialog id="cartModal">
   <div class="modal">
     <button class="close" data-close="cartModal">×</button>
@@ -438,23 +448,31 @@ dialog::backdrop{background:rgba(10,24,39,.62);backdrop-filter:blur(3px)}
 <dialog id="trackModal">
   <div class="modal">
     <button class="close" data-close="trackModal">×</button>
-    <h2 class="trackTitle">Acompanhar pedido</h2>
-    <form class="trackForm" id="trackForm">
-      <div><label>Código do pedido</label><input id="tCode" placeholder="MK-XXXXXXXX" required></div>
-      <div><label>WhatsApp usado no pedido</label><input id="tPhone" inputmode="tel" required></div>
-      <button>Buscar</button>
-    </form>
+    <h2 class="trackTitle">Meus pedidos</h2>
+    <div class="accountBar"><div><strong id="accountName">Minha conta</strong><small id="accountEmail"></small></div><button type="button" id="customerLogout">Sair</button></div>
+    <div class="myOrders" id="myOrders"></div>
     <div class="trackResult" id="trackResult"></div>
   </div>
 </dialog>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.3"></script>
 <script>
 const API="https://yncspxfsvlqdnodlsosb.supabase.co/functions/v1/mundo-kids-api";
-const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const AUTH_URL="https://yncspxfsvlqdnodlsosb.supabase.co",AUTH_KEY="sb_publishable_jALAHHuvrV5oxj2mugWTCQ_stD_vFyN";
+const authDb=supabase.createClient(AUTH_URL,AUTH_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:"mundo-kids-customer-auth"}});
+const $=s=>document.querySelector(s),$all=s=>[...document.querySelectorAll(s)];
 const flow=["received","seen","confirmed","preparing","ready","picked_up"];
 const labels={received:"Recebido",seen:"Visto",confirmed:"Confirmado",preparing:"Em preparo",ready:"Pronto",picked_up:"Retirado",cancelled:"Cancelado"};
-let products=[],filter="all",search="",selected=null,cart=loadCart(),favorites=loadFavs(),checkoutStep=1;
+let products=[],filter="all",search="",selected=null,cart=loadCart(),favorites=loadFavs(),checkoutStep=1,customerSession=null,authMode="login",pendingAction=null,myOrders=[];
 
+async function refreshCustomerSession(){const {data}=await authDb.auth.getSession();customerSession=data.session;return customerSession}
+function authHeader(){return customerSession?{"Authorization":"Bearer "+customerSession.access_token}:{}}
+function setAuthMode(mode){authMode=mode;$all("[data-auth-mode]").forEach(b=>b.classList.toggle("on",b.dataset.authMode===mode));$("#signupNameWrap").classList.toggle("hidden",mode!=="signup");$("#authSubmit").textContent=mode==="signup"?"Criar conta":"Entrar";$("#authPassword").autocomplete=mode==="signup"?"new-password":"current-password";$("#authMsg").textContent=""}
+function showAuthMessage(t,type=""){const m=$("#authMsg");m.textContent=t;m.className="authMsg "+type}
+function openAuth(action=null){pendingAction=action;if(action)localStorage.setItem("mk_pending_auth_action",action);setAuthMode("login");$("#nav").classList.remove("open");if(!$("#authModal").open)$("#authModal").showModal()}
+async function continuePending(){const action=pendingAction||localStorage.getItem("mk_pending_auth_action");pendingAction=null;localStorage.removeItem("mk_pending_auth_action");if(action==="checkout"){openCart();startCheckout()}else if(action==="track"){openMyOrders()}else if(action==="account"){openMyOrders()}}
+async function requireCustomer(action){await refreshCustomerSession();if(customerSession)return true;openAuth(action);return false}
+async function loadAccount(){if(!customerSession)return null;try{const r=await fetch(API+"?action=account",{headers:{...authHeader()}});if(!r.ok)return null;const j=await r.json();const name=j.profile?.full_name||j.user?.full_name||"";const phone=j.profile?.phone||"";if(name&&!$("#cName").value)$("#cName").value=name;if(phone&&!$("#cPhone").value)$("#cPhone").value=phone;$("#accountName").textContent=name||"Minha conta";$("#accountEmail").textContent=j.user?.email||customerSession.user.email||"";return j}catch{return null}}
 function clientId(){let id=localStorage.getItem("mk_client_id");if(!id){id=crypto.randomUUID();localStorage.setItem("mk_client_id",id)}return id}
 function loadCart(){try{return JSON.parse(localStorage.getItem("mk_order_cart")||"{}")}catch{return{}}}
 function loadFavs(){try{return new Set(JSON.parse(localStorage.getItem("mk_favorites")||"[]"))}catch{return new Set()}}
@@ -477,7 +495,7 @@ function render(){
   if(!list.length) $("#products").innerHTML='<div style="grid-column:1/-1;padding:40px;text-align:center;color:#76899d">Nenhum brinquedo encontrado.</div>';
 }
 async function loadProducts(){try{const r=await fetch(API+"?action=products");const j=await r.json();products=j.products||[];render();renderCart()}catch(e){toast("Não foi possível carregar o catálogo agora.")}}
-function setFilter(f){filter=f;$$(".filterChip").forEach(b=>b.classList.toggle("on",b.dataset.filter===f));render();$("#brinquedos").scrollIntoView({behavior:"smooth"})}
+function setFilter(f){filter=f;$all(".filterChip").forEach(b=>b.classList.toggle("on",b.dataset.filter===f));render();$("#brinquedos").scrollIntoView({behavior:"smooth"})}
 function openProduct(id){const p=products.find(x=>x.id===id);if(!p)return;selected=p;$("#mi").src=p.image_url;$("#mi").alt=p.name;$("#mt").textContent=p.name;$("#md").textContent=p.description;$("#ma").textContent=p.age;$("#mtag").textContent=p.label;$("#mp").textContent=priceText(p);$("#mw").href="https://wa.me/5515996395699?text="+encodeURIComponent("Olá Mundo Kids! Quero saber mais sobre "+p.name+".");track("product_view",p.id);$("#productModal").showModal()}
 function addCart(id,qty=1){const p=products.find(x=>x.id===id);if(!p)return;cart[id]=Math.min(20,(cart[id]||0)+qty);saveCart();renderCart();track("add_cart",id);toast(p.name+" adicionado ao pedido.")}
 function toggleFav(id){if(favorites.has(id))favorites.delete(id);else favorites.add(id);saveFavs();render()}
@@ -489,8 +507,9 @@ function renderCart(){
   $("#cartList").innerHTML=entries.map(([id,q])=>{const p=products.find(x=>x.id===id);if(p.price==null)pending=true;else total+=Number(p.price)*q;return '<div class="cartItem"><img src="'+p.image_url+'" alt=""><div><strong>'+p.name+'</strong><small>'+priceText(p)+'</small><button class="remove" data-remove="'+id+'">Remover</button></div><div class="qty"><button data-minus="'+id+'">−</button><b>'+q+'</b><button data-plus="'+id+'">+</button></div></div>'}).join("");
   $("#cartTotal").textContent=pending?(total>0?brl(total)+" + itens a confirmar":"Valor a confirmar"):brl(total);
 }
-function openCart(){checkoutStep=1;showCheckoutStep(1);$("#checkoutForm").classList.add("hidden");$("#cartStage").classList.remove("hidden");$("#orderSuccess").classList.remove("show");renderCart();$("#cartModal").showModal()}
-function showCheckoutStep(step){checkoutStep=step;$$("[data-step]").forEach(s=>s.classList.toggle("on",Number(s.dataset.step)===step));$$("[data-step-dot]").forEach(s=>s.classList.toggle("on",Number(s.dataset.stepDot)<=step));if(step===3)renderSummary()}
+function openCart(){checkoutStep=1;showCheckoutStep(1);$("#checkoutForm").classList.add("hidden");$("#cartStage").classList.remove("hidden");$("#orderSuccess").classList.remove("show");renderCart();if(!$("#cartModal").open)$("#cartModal").showModal()}
+async function startCheckout(){if(!(await requireCustomer("checkout")))return;await loadAccount();$("#cartStage").classList.add("hidden");$("#checkoutForm").classList.remove("hidden");showCheckoutStep(1)}
+function showCheckoutStep(step){checkoutStep=step;$all("[data-step]").forEach(s=>s.classList.toggle("on",Number(s.dataset.step)===step));$all("[data-step-dot]").forEach(s=>s.classList.toggle("on",Number(s.dataset.stepDot)<=step));if(step===3)renderSummary()}
 function renderSummary(){
   const entries=Object.entries(cart).filter(([id,q])=>q>0&&products.some(p=>p.id===id));let total=0,pending=false;
   $("#summaryMeta").innerHTML='<b>'+$("#cName").value+'</b><br>'+$("#cPhone").value+'<br>Retirada: '+($("#cDate").value||"a combinar")+' '+($("#cTime").value||"")+'<br>Pagamento: '+$("#cPayment").value;
@@ -498,35 +517,34 @@ function renderSummary(){
   $("#summaryTotal").textContent=pending?(total>0?brl(total)+" + itens a confirmar":"Valor a confirmar"):brl(total);
 }
 function validateStep1(){if($("#cName").value.trim().length<2){toast("Informe seu nome.");return false}if($("#cPhone").value.replace(/\D/g,"").length<10){toast("Informe um WhatsApp válido.");return false}return true}
-function openTrack(code="",phone=""){if($("#cartModal").open)$("#cartModal").close();$("#tCode").value=code;$("#tPhone").value=phone;$("#trackResult").innerHTML="";$("#trackModal").showModal();if(code&&phone)lookupOrder(code,phone)}
-async function lookupOrder(code,phone){$("#trackResult").innerHTML='<p style="color:#76899d">Consultando...</p>';try{const r=await fetch(API+"?action=track_order&code="+encodeURIComponent(code)+"&phone="+encodeURIComponent(phone));const j=await r.json();if(!r.ok)throw new Error();track("order_track");renderTracking(j.order)}catch{$("#trackResult").innerHTML='<p style="color:#b7334c;font-weight:900">Pedido não encontrado. Confira o código e o WhatsApp.</p>'}}
+async async function openMyOrders(){ $("#nav").classList.remove("open"); if(!(await requireCustomer("track")))return;await loadAccount();if($("#cartModal").open)$("#cartModal").close();$("#trackResult").innerHTML="";$("#myOrders").innerHTML='<div style="padding:24px;text-align:center;color:#76899d">Carregando seus pedidos...</div>';if(!$("#trackModal").open)$("#trackModal").showModal();try{const r=await fetch(API+"?action=my_orders",{headers:{...authHeader()}});const j=await r.json();if(!r.ok)throw new Error();myOrders=j.orders||[];renderMyOrders()}catch{$("#myOrders").innerHTML='<div style="padding:24px;text-align:center;color:#b7334c;font-weight:900">Não foi possível carregar seus pedidos.</div>'}}
+function renderMyOrders(){if(!myOrders.length){$("#myOrders").innerHTML='<div style="padding:30px;text-align:center;color:#76899d">Você ainda não fez nenhum pedido.</div>';return}$("#myOrders").innerHTML=myOrders.map(o=>'<article class="myOrder"><div class="myOrderHead"><div><code>'+o.order_code+'</code><div class="myOrderMeta">'+new Date(o.created_at).toLocaleString("pt-BR")+' • '+(o.items||[]).reduce((s,i)=>s+i.qty,0)+' item(ns)</div></div><span class="statusPill">'+labels[o.status]+'</span></div><button data-my-order="'+o.id+'">Ver andamento</button></article>').join("")}
 function renderTracking(o){const current=flow.indexOf(o.status),cancel=o.status==="cancelled";const items=(o.items||[]).map(i=>'<div>'+i.qty+'× '+i.product_name+'</div>').join("");const tl=flow.map((s,i)=>'<li class="'+(cancel?"":i<current?"done":i===current?"current":"")+'"><strong>'+labels[s]+'</strong></li>').join("");$("#trackResult").innerHTML='<div class="orderHead"><strong>'+o.order_code+' • '+labels[o.status]+'</strong><span>'+o.customer_name+' • '+new Date(o.created_at).toLocaleString("pt-BR")+'</span><div class="orderItems">'+items+'</div></div>'+(cancel?'<p style="color:#b7334c;font-weight:900">Pedido cancelado.</p>':'<ul class="timeline">'+tl+'</ul>')}
-
 $("#year").textContent=new Date().getFullYear();updateCartCount();loadProducts();track("page_view");
 
 $("#menu").onclick=e=>{e.stopPropagation();$("#nav").classList.toggle("open")};
 document.addEventListener("click",e=>{const n=$("#nav");if(!n.classList.contains("open"))return;if(n.contains(e.target)||$("#menu").contains(e.target))return;n.classList.remove("open")});
-$$("#nav a,#nav button").forEach(a=>a.onclick=()=>$("#nav").classList.remove("open"));
+$all("#nav a,#nav button").forEach(a=>a.onclick=()=>$("#nav").classList.remove("open"));
 
 $("#search").onsubmit=e=>{e.preventDefault();search=$("#searchInput").value.trim().toLowerCase();render();$("#brinquedos").scrollIntoView({behavior:"smooth"})};
 $("#searchInput").oninput=e=>{search=e.target.value.trim().toLowerCase();render()};
 
 $("#toggleCats").onclick=()=>{const box=$("#allCats"),show=!box.classList.contains("show");box.classList.toggle("show",show);$("#toggleCats").textContent=show?"Mostrar menos ↑":"Ver todas →"};
-$$(".catCard").forEach(b=>b.onclick=()=>setFilter(b.dataset.cat));
-$$(".filterChip").forEach(b=>b.onclick=()=>setFilter(b.dataset.filter));
+$all(".catCard").forEach(b=>b.onclick=()=>setFilter(b.dataset.cat));
+$all(".filterChip").forEach(b=>b.onclick=()=>setFilter(b.dataset.filter));
 
 $("#products").onclick=e=>{const v=e.target.closest("[data-view]"),a=e.target.closest("[data-add]"),w=e.target.closest("[data-wa]"),f=e.target.closest("[data-fav]");if(v)openProduct(v.dataset.view);if(a)addCart(a.dataset.add);if(w){const p=products.find(x=>x.id===w.dataset.wa);if(p){track("whatsapp",p.id);window.open("https://wa.me/5515996395699?text="+encodeURIComponent("Olá Mundo Kids! Quero saber mais sobre "+p.name+"."),"_blank")}}if(f)toggleFav(f.dataset.fav)};
 $("#addProduct").onclick=()=>{if(selected){addCart(selected.id);$("#productModal").close();openCart()}};
 
-$("#cartBtn").onclick=openCart;$$("[data-cart-open]").forEach(b=>b.onclick=openCart);$$("[data-track-open]").forEach(b=>b.onclick=()=>openTrack());
-$$("[data-close]").forEach(b=>b.onclick=()=>$("#"+b.dataset.close).close());
+$("#cartBtn").onclick=openCart;document.querySelectorAll("[data-cart-open]").forEach(b=>b.onclick=openCart);document.querySelectorAll("[data-track-open]").forEach(b=>b.onclick=openMyOrders);$("#accountMenuBtn").onclick=()=>{$("#nav").classList.remove("open");customerSession?openMyOrders():openAuth("account")};
+$all("[data-close]").forEach(b=>b.onclick=()=>$("#"+b.dataset.close).close());
 
 $("#cartList").onclick=e=>{const plus=e.target.closest("[data-plus]"),minus=e.target.closest("[data-minus]"),rem=e.target.closest("[data-remove]");if(plus){cart[plus.dataset.plus]=Math.min(20,(cart[plus.dataset.plus]||0)+1);saveCart();renderCart()}if(minus){const id=minus.dataset.minus;cart[id]=Math.max(0,(cart[id]||0)-1);if(!cart[id])delete cart[id];saveCart();renderCart()}if(rem){delete cart[rem.dataset.remove];saveCart();renderCart()}};
 
-$("#checkoutOpen").onclick=()=>{$("#cartStage").classList.add("hidden");$("#checkoutForm").classList.remove("hidden");showCheckoutStep(1)};
+$("#checkoutOpen").onclick=startCheckout;
 $("#backCart").onclick=()=>{$("#checkoutForm").classList.add("hidden");$("#cartStage").classList.remove("hidden")};
-$$("[data-next-step]").forEach(b=>b.onclick=()=>{const n=Number(b.dataset.nextStep);if(n===2&&!validateStep1())return;showCheckoutStep(n)});
-$$("[data-prev-step]").forEach(b=>b.onclick=()=>showCheckoutStep(Number(b.dataset.prevStep)));
+$all("[data-next-step]").forEach(b=>b.onclick=()=>{const n=Number(b.dataset.nextStep);if(n===2&&!validateStep1())return;showCheckoutStep(n)});
+$all("[data-prev-step]").forEach(b=>b.onclick=()=>showCheckoutStep(Number(b.dataset.prevStep)));
 
 $("#checkoutForm").onsubmit=async e=>{
   e.preventDefault();if(checkoutStep!==3)return;
@@ -534,16 +552,22 @@ $("#checkoutForm").onsubmit=async e=>{
   const btn=$("#placeOrder");btn.disabled=true;btn.textContent="Enviando...";
   try{
     const payload={client_id:clientId(),customer_name:$("#cName").value,phone:$("#cPhone").value,pickup_date:$("#cDate").value||null,pickup_time:$("#cTime").value||null,payment_method:$("#cPayment").value,notes:$("#cNotes").value,items};
-    const r=await fetch(API+"?action=order",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+    await refreshCustomerSession();if(!customerSession){openAuth("checkout");throw new Error("login_required")}const r=await fetch(API+"?action=order",{method:"POST",headers:{"Content-Type":"application/json",...authHeader()},body:JSON.stringify(payload)});
     const j=await r.json();if(!r.ok)throw new Error(j.error||"error");
     cart={};saveCart();$("#checkoutForm").classList.add("hidden");$("#orderSuccess").classList.add("show");$("#successCode").textContent=j.order_code;$("#trackSuccess").dataset.code=j.order_code;$("#trackSuccess").dataset.phone=payload.phone;localStorage.setItem("mk_last_order",JSON.stringify({code:j.order_code,phone:payload.phone}));toast("Pedido enviado com sucesso.");
   }catch(err){toast(err.message==="rate_limited"?"Muitos pedidos seguidos. Aguarde um pouco.":"Não foi possível enviar o pedido.")}
   finally{btn.disabled=false;btn.textContent="Enviar pedido"}
 };
-$("#trackSuccess").onclick=e=>openTrack(e.currentTarget.dataset.code,e.currentTarget.dataset.phone);
-$("#trackForm").onsubmit=e=>{e.preventDefault();lookupOrder($("#tCode").value.trim().toUpperCase(),$("#tPhone").value.trim())};
+$("#trackSuccess").onclick=openMyOrders;$("#myOrders").onclick=e=>{const b=e.target.closest("[data-my-order]");if(!b)return;const o=myOrders.find(x=>x.id===b.dataset.myOrder);if(o)renderTracking(o)};
 
-$("#gift").onsubmit=e=>{e.preventDefault();const a=$("#age").value,i=$("#interest").value,b=$("#budget").value;track("gift");const text="Olá Mundo Kids! Quero sugestões de presente para "+a+". Interesse: "+i+". Faixa de valor: "+b;const r=$("#giftResult");r.innerHTML='<strong>Pronto!</strong> <a target="_blank" rel="noopener" href="https://wa.me/5515996395699?text='+encodeURIComponent(text)+'">Pedir sugestões no WhatsApp</a>';r.classList.add("show")};
+$all("[data-auth-mode]").forEach(b=>b.onclick=()=>setAuthMode(b.dataset.authMode));
+$("#googleLogin").onclick=async()=>{pendingAction=pendingAction||localStorage.getItem("mk_pending_auth_action");if(pendingAction)localStorage.setItem("mk_pending_auth_action",pendingAction);showAuthMessage("Abrindo o Google...","ok");const {error}=await authDb.auth.signInWithOAuth({provider:"google",options:{redirectTo:location.origin+location.pathname}});if(error)showAuthMessage("Não foi possível abrir o Google agora.","err")};
+$("#authForm").onsubmit=async e=>{e.preventDefault();const btn=$("#authSubmit");btn.disabled=true;showAuthMessage(authMode==="signup"?"Criando sua conta...":"Entrando...","ok");try{const email=$("#authEmail").value.trim().toLowerCase(),password=$("#authPassword").value;if(authMode==="signup"){const full_name=$("#authName").value.trim();if(full_name.length<2){showAuthMessage("Digite seu nome.","err");return}const {data,error}=await authDb.auth.signUp({email,password,options:{emailRedirectTo:location.origin+location.pathname,data:{full_name}}});if(error)throw error;if(!data.session){showAuthMessage("Conta criada! Confira seu e-mail para confirmar e depois entre.","ok");return}customerSession=data.session}else{const {data,error}=await authDb.auth.signInWithPassword({email,password});if(error)throw error;customerSession=data.session}$("#authModal").close();await loadAccount();await continuePending()}catch(err){showAuthMessage(err?.message?.includes("Invalid login")?"E-mail ou senha incorretos.":(err?.message||"Não foi possível entrar."),"err")}finally{btn.disabled=false}};
+$("#customerLogout").onclick=async()=>{await authDb.auth.signOut();customerSession=null;$("#trackModal").close();toast("Você saiu da sua conta.")};
+authDb.auth.onAuthStateChange((event,session)=>{customerSession=session;if(event==="SIGNED_IN"){setTimeout(async()=>{await loadAccount();const p=localStorage.getItem("mk_pending_auth_action");if(p){pendingAction=p;await continuePending()}},0)}});
+(async()=>{await refreshCustomerSession();if(customerSession){await loadAccount();const p=localStorage.getItem("mk_pending_auth_action");if(p){pendingAction=p;await continuePending()}}})();
+
+$("#gift").onsubmit=e=>{e.preventDefault();const a=$("#age").value,i=$("#interest").value,b=$("#budget").value;track("gift");const text="Olá Mundo Kids! Quero sugestões de presente para "+a+". Interesse: "+i+". Faixa de valor: "+b;const r=$("#giftResult");r.innerHTML='<a class="giftCta" target="_blank" rel="noopener" href="https://wa.me/5515996395699?text='+encodeURIComponent(text)+'">💬 Falar com a Mundo Kids no WhatsApp →</a>';r.classList.add("show")};
 </script>
 </body>
 </html>
