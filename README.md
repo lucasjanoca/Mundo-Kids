@@ -17,3 +17,5 @@ Os produtos exibidos são demonstrativos e podem ser substituídos pelos produto
 
 ## Publicação
 GitHub Pages: branch `main`, pasta `/root`.
+
+Última atualização: publicação acionada em 27/08/2026.
