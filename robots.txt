@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /Mundo-Kids/admin.html
+Disallow: /Mundo-Kids/admin-login.html
+
+Sitemap: https://lucasjanoca.github.io/Mundo-Kids/sitemap.xml
