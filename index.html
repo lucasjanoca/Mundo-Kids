@@ -4,8 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Mundo Kids">
+<meta name="apple-mobile-web-app-title" content="Mundo Kids">
 <meta name="description" content="Mundo Kids Brinquedos em Cerquilho-SP. Catálogo de brinquedos, pedidos online e acompanhamento até a retirada.">
 <title>Mundo Kids Brinquedos</title>
+<link rel="manifest" href="manifest.webmanifest?v=1.0.0">
+<link rel="icon" href="assets/img/mascot-robot.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://yncspxfsvlqdnodlsosb.supabase.co" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -668,7 +676,7 @@ $("#checkoutForm").onsubmit=async e=>{
     await refreshCustomerSession();if(!customerSession){openAuth("checkout");throw new Error("login_required")}const r=await fetch(API+"?action=order",{method:"POST",headers:{"Content-Type":"application/json",...authHeader()},body:JSON.stringify(payload)});
     const j=await r.json();if(!r.ok)throw new Error(j.error||"error");
     cart={};saveCart();$("#checkoutForm").classList.add("hidden");$("#orderSuccess").classList.add("show");$("#successCode").textContent=j.order_code;$("#trackSuccess").dataset.code=j.order_code;$("#trackSuccess").dataset.phone=payload.phone;localStorage.setItem("mk_last_order",JSON.stringify({code:j.order_code,phone:payload.phone}));toast("Pedido enviado com sucesso.");
-  }catch(err){toast(err.message==="rate_limited"?"Muitos pedidos seguidos. Aguarde um pouco.":"Não foi possível enviar o pedido.")}
+  }catch(err){toast(err.message==="rate_limited"?"Muitos pedidos seguidos. Aguarde um pouco.":err.message==="products_unavailable"?"Um produto do carrinho ficou indisponível. Atualize o catálogo e tente novamente.":"Não foi possível enviar o pedido.")}
   finally{btn.disabled=false;btn.textContent="Enviar pedido"}
 };
 $("#trackSuccess").onclick=openMyOrders;$("#myOrders").onclick=e=>{const b=e.target.closest("[data-my-order]");if(!b)return;const o=myOrders.find(x=>x.id===b.dataset.myOrder);if(o)renderTracking(o)};
@@ -681,6 +689,18 @@ authDb.auth.onAuthStateChange((event,session)=>{customerSession=session;if(event
 (async()=>{await refreshCustomerSession();if(customerSession){await loadAccount();const p=localStorage.getItem("mk_pending_auth_action");if(p){pendingAction=p;await continuePending()}}})();
 
 $("#gift").onsubmit=e=>{e.preventDefault();const a=$("#age").value,i=$("#interest").value,b=$("#budget").value;track("gift");const text="Olá Mundo Kids! Quero sugestões de presente para "+a+". Interesse: "+i+". Faixa de valor: "+b;const r=$("#giftResult");r.innerHTML='<a class="giftCta" target="_blank" rel="noopener" href="https://wa.me/5515996395699?text='+encodeURIComponent(text)+'">💬 Falar com a Mundo Kids no WhatsApp →</a>';r.classList.add("show")};
+
+/* MUNDO_KIDS_RELIABILITY_V1 */
+if("serviceWorker" in navigator){
+  addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js",{scope:"./",updateViaCache:"none"}).then(r=>r.update().catch(()=>{})).catch(()=>{}),{once:true});
+}
+document.addEventListener("error",event=>{
+  const img=event.target;
+  if(!(img instanceof HTMLImageElement)||img.dataset.mkFallback==="1")return;
+  img.dataset.mkFallback="1";
+  img.src="assets/img/mascot-robot.svg";
+  img.alt=img.alt||"Mundo Kids";
+},true);
 </script>
 </body>
 </html>

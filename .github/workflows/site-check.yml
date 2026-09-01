@@ -1,0 +1,100 @@
+name: Mundo Kids site check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  site-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Reject server secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -RInE --exclude-dir=.git 'service[_-]?role|sb_secret_[A-Za-z0-9_-]{8,}|BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY' .; then
+            echo "Possível segredo administrativo em arquivo público."
+            exit 1
+          fi
+
+      - name: Verify required files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f index.html
+          test -f admin-login.html
+          test -f admin.html
+          test -f 404.html
+          test -f manifest.webmanifest
+          test -f service-worker.js
+          test -f offline.html
+          test -f robots.txt
+          test -f sitemap.xml
+          test -f SECURITY.md
+          test -f .well-known/security.txt
+          grep -q '"display": "standalone"' manifest.webmanifest
+          grep -q "mundo-kids-pwa-v" service-worker.js
+
+      - name: Verify local HTML references
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, urllib.parse
+
+          failed=[]
+          for html in Path('.').glob('*.html'):
+              text=html.read_text(encoding='utf-8')
+              refs=re.findall(r'(?:src|href)=["\x27]([^"\x27#?]+)',text,re.I)
+              for ref in refs:
+                  if ref.startswith(('http://','https://','mailto:','tel:','javascript:','data:','blob:')):
+                      continue
+                  p=urllib.parse.unquote(ref)
+                  target=(html.parent/p).resolve()
+                  if not target.exists():
+                      failed.append(f'{html}: {ref}')
+          if failed:
+              raise SystemExit('Referências locais ausentes:\n'+'\n'.join(failed))
+          PY
+
+      - name: Verify inline JavaScript syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          out=Path('/tmp/mk-js')
+          out.mkdir(exist_ok=True)
+          n=0
+          for html in [Path('index.html'),Path('admin-login.html'),Path('admin.html')]:
+              text=html.read_text(encoding='utf-8')
+              for block in re.findall(r'<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)</script>',text,re.I):
+                  n+=1
+                  (out/f'{n}.js').write_text(block,encoding='utf-8')
+          print(f'{n} blocos JS extraídos')
+          PY
+          for f in /tmp/mk-js/*.js; do node --check "$f"; done
+
+
+      - name: Verify production backend health
+        shell: bash
+        run: |
+          set -euo pipefail
+          HEALTH="$(curl --silent --show-error --fail --max-time 20 'https://yncspxfsvlqdnodlsosb.supabase.co/functions/v1/mundo-kids-api?action=health')"
+          printf '%s' "$HEALTH" | grep -q '"ok":true'
+          printf '%s' "$HEALTH" | grep -q '"version":6'
+
+          PRODUCTS="$(curl --silent --show-error --fail --max-time 20 'https://yncspxfsvlqdnodlsosb.supabase.co/functions/v1/mundo-kids-api?action=products')"
+          printf '%s' "$PRODUCTS" | grep -q '"products"'
