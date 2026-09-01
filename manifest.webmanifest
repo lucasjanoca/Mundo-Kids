@@ -1,0 +1,35 @@
+{
+  "id": "./",
+  "name": "Mundo Kids Brinquedos",
+  "short_name": "Mundo Kids",
+  "description": "Catálogo, pedidos e acompanhamento da Mundo Kids Brinquedos.",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#f6faff",
+  "theme_color": "#ffffff",
+  "categories": ["shopping", "kids", "lifestyle"],
+  "icons": [
+    {
+      "src": "assets/img/mascot-robot.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Brinquedos",
+      "short_name": "Brinquedos",
+      "url": "./#brinquedos"
+    },
+    {
+      "name": "Categorias",
+      "short_name": "Categorias",
+      "url": "./#categorias"
+    }
+  ]
+}
