@@ -86,3 +86,15 @@ jobs:
           print(f'{n} blocos JS extraídos')
           PY
           for f in /tmp/mk-js/*.js; do node --check "$f"; done
+
+
+      - name: Verify production backend health
+        shell: bash
+        run: |
+          set -euo pipefail
+          HEALTH="$(curl --silent --show-error --fail --max-time 20 'https://yncspxfsvlqdnodlsosb.supabase.co/functions/v1/mundo-kids-api?action=health')"
+          printf '%s' "$HEALTH" | grep -q '"ok":true'
+          printf '%s' "$HEALTH" | grep -q '"version":6'
+
+          PRODUCTS="$(curl --silent --show-error --fail --max-time 20 'https://yncspxfsvlqdnodlsosb.supabase.co/functions/v1/mundo-kids-api?action=products')"
+          printf '%s' "$PRODUCTS" | grep -q '"products"'
