@@ -676,7 +676,7 @@ $("#checkoutForm").onsubmit=async e=>{
     await refreshCustomerSession();if(!customerSession){openAuth("checkout");throw new Error("login_required")}const r=await fetch(API+"?action=order",{method:"POST",headers:{"Content-Type":"application/json",...authHeader()},body:JSON.stringify(payload)});
     const j=await r.json();if(!r.ok)throw new Error(j.error||"error");
     cart={};saveCart();$("#checkoutForm").classList.add("hidden");$("#orderSuccess").classList.add("show");$("#successCode").textContent=j.order_code;$("#trackSuccess").dataset.code=j.order_code;$("#trackSuccess").dataset.phone=payload.phone;localStorage.setItem("mk_last_order",JSON.stringify({code:j.order_code,phone:payload.phone}));toast("Pedido enviado com sucesso.");
-  }catch(err){toast(err.message==="rate_limited"?"Muitos pedidos seguidos. Aguarde um pouco.":"Não foi possível enviar o pedido.")}
+  }catch(err){toast(err.message==="rate_limited"?"Muitos pedidos seguidos. Aguarde um pouco.":err.message==="products_unavailable"?"Um produto do carrinho ficou indisponível. Atualize o catálogo e tente novamente.":"Não foi possível enviar o pedido.")}
   finally{btn.disabled=false;btn.textContent="Enviar pedido"}
 };
 $("#trackSuccess").onclick=openMyOrders;$("#myOrders").onclick=e=>{const b=e.target.closest("[data-my-order]");if(!b)return;const o=myOrders.find(x=>x.id===b.dataset.myOrder);if(o)renderTracking(o)};
