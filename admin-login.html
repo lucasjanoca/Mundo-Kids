@@ -17,7 +17,43 @@
 <form id="login"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email" required><label for="password">Senha</label><div class="pass"><input id="password" name="password" type="password" autocomplete="current-password" required><button type="button" class="show" id="toggle">Mostrar</button></div><button class="btn" id="submit">Entrar</button><p class="msg" id="msg" aria-live="polite"></p></form>
 <a class="back" href="index.html">← Voltar para a loja</a>
 </main>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.3"></script>
+<script>
+const AUTH_URL="https://rgngqumqzylthdiazvfu.supabase.co",AUTH_KEY="sb_publishable_Nw2oaGdMQHVIJNhUpjv5ag_JcxmRu2w";
+const API="https://yncspxfsvlqdnodlsosb.supabase.co/functions/v1/mundo-kids-api";
+const SESSION_KEY="mundo-kids-admin-auth";
+const msg=document.getElementById("msg"),form=document.getElementById("login"),btn=document.getElementById("submit");
+function message(t,type){msg.textContent=t;msg.className="msg "+type}
+function readSession(){try{const p=JSON.parse(localStorage.getItem(SESSION_KEY)||"null");return p?.access_token?p:(p?.session||p?.currentSession||null)}catch{return null}}
+function saveSession(s){try{localStorage.setItem(SESSION_KEY,JSON.stringify(s))}catch{}}
+function clearSession(){try{localStorage.removeItem(SESSION_KEY)}catch{}}
+async function timedFetch(url,opts={},ms=7000){const c=new AbortController(),t=setTimeout(()=>c.abort(),ms);try{return await fetch(url,{...opts,signal:c.signal})}finally{clearTimeout(t)}}
+async function checkAdmin(session){
+  if(!session?.access_token)return false;
+  try{
+    const r=await timedFetch(API+"?action=admin_check",{headers:{"Authorization":"Bearer "+session.access_token}},6500);
+    return r.ok
+  }catch{return false}
+}
+async function passwordLogin(email,password){
+  const r=await timedFetch(AUTH_URL+"/auth/v1/token?grant_type=password",{method:"POST",headers:{"apikey":AUTH_KEY,"Content-Type":"application/json"},body:JSON.stringify({email,password})},7000);
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok||!j.access_token)throw new Error("invalid_login");
+  return j
+}
+(async()=>{const s=readSession();if(s&&await checkAdmin(s))location.replace("admin.html?v=20260902-1100")})().catch(()=>{});
+document.getElementById("toggle").onclick=()=>{const p=document.getElementById("password");const show=p.type==="password";p.type=show?"text":"password";document.getElementById("toggle").textContent=show?"Ocultar":"Mostrar"};
+form.onsubmit=async e=>{
+  e.preventDefault();btn.disabled=true;message("Verificando acesso...","ok");
+  try{
+    const email=document.getElementById("email").value.trim().toLowerCase(),password=document.getElementById("password").value;
+    const session=await passwordLogin(email,password);saveSession(session);
+    if(!(await checkAdmin(session))){clearSession();message("Esta conta não possui acesso administrativo ou o serviço está indisponível.","err");return}
+    message("Acesso autorizado.","ok");location.replace("admin.html?v=20260902-1100")
+  }catch(e){
+    console.error(e);message(e?.message==="invalid_login"?"E-mail ou senha incorretos.":"Não foi possível entrar agora. Tente novamente.","err")
+  }finally{btn.disabled=false}
+};
+</script>
 <script>
 const db=supabase.createClient("https://rgngqumqzylthdiazvfu.supabase.co","sb_publishable_Nw2oaGdMQHVIJNhUpjv5ag_JcxmRu2w",{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:"mundo-kids-admin-auth"}});
 const API="https://yncspxfsvlqdnodlsosb.supabase.co/functions/v1/mundo-kids-api";
