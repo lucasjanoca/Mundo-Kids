@@ -47,13 +47,13 @@ dialog{border:0;padding:0;border-radius:22px;max-width:min(680px,calc(100% - 18p
 
 <dialog id="orderModal"><div class="modal"><h2 id="orderTitle">Pedido</h2><div class="orderDetailGrid" id="orderInfo"></div><div class="orderItems" id="orderItems"></div><ul class="timeline" id="orderTimeline"></ul><div class="detailActions"><button class="nextStatus" id="orderNext">Avançar status</button><button class="cancelOrder" id="orderCancel">Cancelar pedido</button><button class="btn" data-close="orderModal">Fechar</button></div></div></dialog>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.3"></script>
 <script>
 const AUTH_URL="https://rgngqumqzylthdiazvfu.supabase.co",AUTH_KEY="sb_publishable_Nw2oaGdMQHVIJNhUpjv5ag_JcxmRu2w",API="https://yncspxfsvlqdnodlsosb.supabase.co/functions/v1/mundo-kids-api";
-const db=supabase.createClient(AUTH_URL,AUTH_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:"mundo-kids-admin-auth"}});
+const SESSION_KEY="mundo-kids-admin-auth";
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const flow=["received","seen","confirmed","preparing","ready","picked_up"],labels={received:"Recebido",seen:"Visto",confirmed:"Confirmado",preparing:"Em preparo",ready:"Pronto",picked_up:"Retirado",cancelled:"Cancelado"};
 let dashboard=null,orders=[],session=null,timer,currentOrder=null,knownOrderIds=new Set(),firstLoad=true,orderGroup="all";
+setTimeout(()=>{document.getElementById("loading")?.classList.add("hide")},7500);
 function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("show");clearTimeout(timer);timer=setTimeout(()=>e.classList.remove("show"),1900)}
 function fmt(d){return d?new Date(d).toLocaleString("pt-BR"):"-"}
 function dateOnly(d){if(!d)return"-";const [y,m,day]=String(d).split("-");return day&&m&&y?day+"/"+m+"/"+y:d}
@@ -61,10 +61,38 @@ function short(id){return id?String(id).slice(0,8)+"…":"-"}
 function brl(v){return v===null||v===undefined||v===""?"—":Number(v).toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
 function esc(v){return String(v??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]))}
 function safeImg(v){try{const u=new URL(String(v||""),location.href);return ["https:","http:"].includes(u.protocol)?u.href:""}catch{return""}}
-function waitTimeout(ms){return new Promise((_,reject)=>setTimeout(()=>reject(new Error("timeout")),ms))}
-function storedAdminSession(){try{const raw=localStorage.getItem("mundo-kids-admin-auth");if(!raw)return null;const parsed=JSON.parse(raw);const candidate=parsed?.access_token?parsed:(parsed?.currentSession||parsed?.session||null);return candidate?.access_token?candidate:null}catch{return null}}
-async function requireAdmin(){try{const result=await Promise.race([db.auth.getSession(),waitTimeout(4500)]);session=result?.data?.session||storedAdminSession()}catch{session=storedAdminSession()}if(!session?.access_token){location.replace("admin-login.html");return false}$("#adminEmail").textContent=session.user?.email||"Administrador";return true}
-async function api(action,opts={}){const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),9000);try{const r=await fetch(API+"?action="+encodeURIComponent(action),{...opts,signal:controller.signal,headers:{...(opts.headers||{}),"Content-Type":"application/json","Authorization":"Bearer "+session.access_token}});const j=await r.json().catch(()=>({}));if(r.status===401){db.auth.signOut().catch(()=>{});location.replace("admin-login.html");throw new Error("unauthorized")}if(!r.ok)throw new Error(j.error||"Erro");return j}finally{clearTimeout(timeout)}}
+function storedAdminSession(){try{const raw=localStorage.getItem(SESSION_KEY);if(!raw)return null;const parsed=JSON.parse(raw);const candidate=parsed?.access_token?parsed:(parsed?.currentSession||parsed?.session||null);return candidate?.access_token?candidate:null}catch{return null}}
+function saveAdminSession(value){try{localStorage.setItem(SESSION_KEY,JSON.stringify(value))}catch{}}
+function clearAdminSession(){try{localStorage.removeItem(SESSION_KEY)}catch{}}
+async function refreshAdminSession(current){
+  if(!current?.refresh_token)return current;
+  const expiresAt=Number(current.expires_at||0);
+  if(current.access_token&&(!expiresAt||expiresAt*1000>Date.now()+60000))return current;
+  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),5000);
+  try{
+    const r=await fetch(AUTH_URL+"/auth/v1/token?grant_type=refresh_token",{method:"POST",signal:controller.signal,headers:{"apikey":AUTH_KEY,"Content-Type":"application/json"},body:JSON.stringify({refresh_token:current.refresh_token})});
+    if(!r.ok)return current;
+    const fresh=await r.json();
+    const next={...current,...fresh};saveAdminSession(next);return next
+  }catch{return current}finally{clearTimeout(timeout)}
+}
+async function requireAdmin(){
+  session=storedAdminSession();
+  if(!session?.access_token){location.replace("admin-login.html?v=20260902-1100");return false}
+  session=await refreshAdminSession(session);
+  $("#adminEmail").textContent=session.user?.email||"Administrador";
+  return true
+}
+async function api(action,opts={}){
+  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),6500);
+  try{
+    const r=await fetch(API+"?action="+encodeURIComponent(action),{...opts,signal:controller.signal,headers:{...(opts.headers||{}),"Content-Type":"application/json","Authorization":"Bearer "+session.access_token}});
+    const j=await r.json().catch(()=>({}));
+    if(r.status===401){clearAdminSession();location.replace("admin-login.html?v=20260902-1100");throw new Error("unauthorized")}
+    if(!r.ok)throw new Error(j.error||"Erro");
+    return j
+  }finally{clearTimeout(timeout)}
+}
 function emptyDashboard(){return{metrics:{orders_open:0,orders_ready:0,products_active:0,customers:0,visitors:0},products:[],clients:[],recent_events:[]}}
 async function load(){try{const [d,o]=await Promise.all([api("dashboard"),api("orders")]);dashboard=d;const incomingOrders=o.orders||[];if(!firstLoad){const fresh=incomingOrders.filter(x=>!knownOrderIds.has(x.id));if(fresh.length){toast(fresh.length===1?"Novo pedido recebido!":fresh.length+" novos pedidos recebidos!");if(navigator.vibrate)navigator.vibrate([120,70,120]);const oldTitle=document.title;document.title="("+fresh.length+") Novo pedido • Mundo Kids";setTimeout(()=>document.title=oldTitle,5000)}}orders=incomingOrders;knownOrderIds=new Set(orders.map(x=>x.id));firstLoad=false;render()}catch(e){console.error(e);if(e?.message!=="unauthorized"){if(!dashboard){dashboard=emptyDashboard();orders=[];render()}toast("Painel aberto. Não foi possível atualizar os dados agora.")}}finally{$("#loading").classList.add("hide")}}
 function render(){const m=dashboard.metrics;$("#mOpen").textContent=m.orders_open;$("#mReady").textContent=m.orders_ready;$("#mProducts").textContent=m.products_active;$("#mCustomers").textContent=m.customers;$("#mVisitors").textContent=m.visitors;$("#orderBadge").textContent=m.orders_open;$("#orderBadge").style.display=m.orders_open?"inline-grid":"none";renderCatalog();renderOrders();renderClients();$("#recentOverview").innerHTML=eventList(dashboard.recent_events.slice(0,6));$("#eventRows").innerHTML=eventList(dashboard.recent_events);$("#recentOrders").innerHTML=orders.slice(0,6).map(o=>'<div class="orderCard"><code>'+esc(o.order_code)+'</code><h3>'+esc(o.customer_name)+'</h3><p>'+esc(labels[o.status]||o.status)+' • '+esc(fmt(o.created_at))+'</p><button class="mini" data-order-open="'+esc(o.id)+'">Ver pedido</button></div>').join("")||'<div class="empty">Nenhum pedido recebido ainda.</div>'}
@@ -105,7 +133,7 @@ $("#adminStoreLink").onclick=e=>{e.preventDefault();window.location.href="https:
 $("#menuBtn").onclick=e=>{e.stopPropagation();setSide(!$("#side").classList.contains("open"))};
 $("#sideBackdrop").onclick=()=>setSide(false);
 document.addEventListener("keydown",e=>{if(e.key==="Escape")setSide(false)});
-$("#refresh").onclick=load;$("#reloadOrders").onclick=load;$("#logout").onclick=async()=>{await db.auth.signOut();location.replace("admin-login.html")};
+$("#refresh").onclick=load;$("#reloadOrders").onclick=load;$("#logout").onclick=async()=>{try{if(session?.access_token)await fetch(AUTH_URL+"/auth/v1/logout",{method:"POST",headers:{"apikey":AUTH_KEY,"Authorization":"Bearer "+session.access_token}})}catch{}clearAdminSession();location.replace("admin-login.html?v=20260902-1100")};
 $("#catalogSearch").oninput=renderCatalog;$("#orderSearch").oninput=renderOrders;$("#newProduct").onclick=()=>openProductModal();document.querySelectorAll("[data-order-filter]").forEach(b=>b.onclick=()=>{orderGroup=b.dataset.orderFilter;renderOrders();b.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"})});
 $("#catalogRows").onclick=e=>{const active=e.target.closest("[data-active]"),edit=e.target.closest("[data-edit]"),del=e.target.closest("[data-delete]");if(active){const p=dashboard.products.find(x=>x.id===active.dataset.active);saveProduct(p.id,{active:!p.active})}if(edit){const p=dashboard.products.find(x=>x.id===edit.dataset.edit);openProductModal(p)}if(del){const p=dashboard.products.find(x=>x.id===del.dataset.delete);if(confirm('Excluir "'+p.name+'" do catálogo? Essa ação remove o item do sistema.')){fetch(API+"?action=product&id="+encodeURIComponent(p.id),{method:"DELETE",headers:{"Authorization":"Bearer "+session.access_token}}).then(r=>{if(!r.ok)throw 0;toast("Produto excluído.");load()}).catch(()=>toast("Não foi possível excluir."))}}};
 $("#productForm").onsubmit=async e=>{e.preventDefault();const id=$("#pId").value,payload={name:$("#pName").value,category:$("#pCategory").value,label:$("#pLabel").value,age:$("#pAge").value,price:$("#pPrice").value===""?null:Number($("#pPrice").value),image_url:$("#pImage").value,description:$("#pDescription").value};try{if(id)await api("product",{method:"PATCH",body:JSON.stringify({id,...payload})});else await api("product",{method:"POST",body:JSON.stringify(payload)});$("#productModal").close();toast(id?"Produto atualizado.":"Produto adicionado.");await load()}catch(e){console.error(e);toast("Não foi possível salvar o produto.")}};
@@ -114,7 +142,7 @@ $("#recentOrders").onclick=e=>{const b=e.target.closest("[data-order-open]");if(
 $("#orderNext").onclick=()=>{if(!currentOrder)return;const n=flow[flow.indexOf(currentOrder.status)+1];if(n)changeStatus(currentOrder.id,n)};
 $("#orderCancel").onclick=()=>{if(!currentOrder)return;const reason=prompt("Motivo do cancelamento (opcional):","");if(reason!==null)changeStatus(currentOrder.id,"cancelled",reason)};
 $$("[data-close]").forEach(b=>b.onclick=()=>$("#"+b.dataset.close).close());
-(async()=>{try{if(await requireAdmin()){await load();setInterval(()=>{if(!document.hidden&&!document.querySelector("dialog[open]"))load()},10000)}}catch(e){console.error(e);$("#loading").classList.add("hide");toast("Não foi possível validar o acesso.")}})();
+(async()=>{try{if(await requireAdmin()){$("#loading").classList.add("hide");await load();setInterval(()=>{if(!document.hidden&&!document.querySelector("dialog[open]"))load()},15000)}}catch(e){console.error(e);$("#loading").classList.add("hide");if(!dashboard){dashboard=emptyDashboard();orders=[];render()}toast("Painel aberto. Atualize os dados quando a conexão estabilizar.")}})();
 </script>
 </body>
 </html>
