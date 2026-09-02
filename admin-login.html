@@ -20,12 +20,13 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.3"></script>
 <script>
 const db=supabase.createClient("https://rgngqumqzylthdiazvfu.supabase.co","sb_publishable_Nw2oaGdMQHVIJNhUpjv5ag_JcxmRu2w",{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:"mundo-kids-admin-auth"}});
+const API="https://yncspxfsvlqdnodlsosb.supabase.co/functions/v1/mundo-kids-api";
 const msg=document.getElementById("msg"),form=document.getElementById("login"),btn=document.getElementById("submit");
 function message(t,type){msg.textContent=t;msg.className="msg "+type}
-async function role(user){const {data,error}=await db.from("profiles").select("role,is_blocked").eq("id",user.id).maybeSingle();if(error)throw error;return data}
-db.auth.getSession().then(async({data})=>{if(data.session?.user){try{const p=await role(data.session.user);if(p?.role==="admin"&&!p?.is_blocked)location.replace("admin.html")}catch{}}});
+async function checkAdmin(session){if(!session?.access_token)return false;const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),8000);try{const r=await fetch(API+"?action=admin_check",{headers:{"Authorization":"Bearer "+session.access_token},signal:controller.signal});return r.ok}catch{return false}finally{clearTimeout(timeout)}}
+db.auth.getSession().then(async({data})=>{if(data.session&&await checkAdmin(data.session))location.replace("admin.html")}).catch(()=>{});
 document.getElementById("toggle").onclick=()=>{const p=document.getElementById("password");const show=p.type==="password";p.type=show?"text":"password";document.getElementById("toggle").textContent=show?"Ocultar":"Mostrar"};
-form.onsubmit=async e=>{e.preventDefault();btn.disabled=true;message("Verificando acesso...","ok");try{const email=document.getElementById("email").value.trim().toLowerCase(),password=document.getElementById("password").value;const {data,error}=await db.auth.signInWithPassword({email,password});if(error||!data.user){message("E-mail ou senha incorretos.","err");return}const p=await role(data.user);if(p?.role!=="admin"||p?.is_blocked){await db.auth.signOut();message("Esta conta não possui acesso administrativo.","err");return}message("Acesso autorizado.","ok");setTimeout(()=>location.replace("admin.html"),250)}catch(e){console.error(e);message("Não foi possível entrar agora. Tente novamente.","err")}finally{btn.disabled=false}};
+form.onsubmit=async e=>{e.preventDefault();btn.disabled=true;message("Verificando acesso...","ok");try{const email=document.getElementById("email").value.trim().toLowerCase(),password=document.getElementById("password").value;const {data,error}=await db.auth.signInWithPassword({email,password});if(error||!data.user||!data.session){message("E-mail ou senha incorretos.","err");return}if(!(await checkAdmin(data.session))){await db.auth.signOut();message("Esta conta não possui acesso administrativo ou o serviço está indisponível.","err");return}message("Acesso autorizado.","ok");setTimeout(()=>location.replace("admin.html"),180)}catch(e){console.error(e);message("Não foi possível entrar agora. Tente novamente.","err")}finally{btn.disabled=false}};
 </script>
 </body>
 </html>
