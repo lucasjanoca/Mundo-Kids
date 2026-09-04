@@ -252,7 +252,13 @@ async function openOrder(id){
   }catch(e){console.error(e);toast("Não foi possível abrir os detalhes do pedido.")}
 }
 async function changeStatus(id,status,note=""){
-  try{await api("order_status",{method:"PATCH",body:JSON.stringify({id,status,note})});if($("#orderModal").open)$("#orderModal").close();toast("Status atualizado.");await load({quiet:true});currentOrder=orders.find(o=>o.id===id)||null;if(currentOrder)openOrder(id)}catch(e){console.error(e);toast("Não foi possível alterar o status.")}
+  try{
+    await api("order_status",{method:"PATCH",body:JSON.stringify({id,status,note})});
+    if($("#orderModal").open)$("#orderModal").close();
+    currentOrder=null;
+    toast(`Pedido movido para ${labels[status]||status}.`);
+    await load({quiet:true});
+  }catch(e){console.error(e);toast("Não foi possível alterar o status.")}
 }
 function setSide(open){$("#side").classList.toggle("open",open);$("#sideBackdrop").classList.toggle("show",open);$("#menuBtn").setAttribute("aria-expanded",String(open));document.body.style.overflow=open&&innerWidth<=1000?"hidden":""}
 $$(".tab").forEach(t=>t.addEventListener("click",()=>{$$(".tab").forEach(x=>x.classList.remove("on"));$$(".panel").forEach(x=>x.classList.remove("on"));t.classList.add("on");$(`[data-panel="${t.dataset.tab}"]`)?.classList.add("on");setSide(false)}));
