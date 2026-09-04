@@ -1,148 +1,278 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#1565ff">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#1565ff">
 <title>Mundo Kids | Painel ADM</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="manifest" href="admin-manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--b:#1565ff;--bd:#0d49d6;--p:#f5369d;--g:#35bf4f;--y:#ffd53a;--r:#e04b62;--ink:#172541;--txt:#455c73;--muted:#72879d;--line:#dbe6ef;--soft:#f4f8fc;--sh:0 14px 34px rgba(16,66,115,.09)}
-*{box-sizing:border-box}body{margin:0;font-family:Nunito,system-ui,sans-serif;background:var(--soft);color:var(--txt)}button,input,textarea,select{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}.shell{display:grid;grid-template-columns:270px minmax(0,1fr);min-height:100vh}.side{background:#fff;border-right:1px solid var(--line);padding:22px;display:flex;flex-direction:column;gap:20px;position:sticky;top:0;height:100vh}.sideBackdrop{display:none}.logo{font:800 1.75rem "Baloo 2";letter-spacing:-1.1px;text-decoration:none;color:inherit;display:block}.m{color:#f5369d}.u{color:#ff972e}.n{color:#35bf4f}.d{color:#8f52f1}.o{color:#e7b000}.k{color:#1565ff}.logo small{display:block;font:900 .58rem Nunito;letter-spacing:2px;color:#63809a;margin-top:6px}.nav{display:grid;gap:8px}.tab{border:1px solid var(--line);border-radius:14px;padding:13px 14px;background:#f7fbff;text-align:left;color:#29445d;font-weight:900;display:flex;align-items:center;justify-content:space-between;gap:8px}.tab.on{background:linear-gradient(135deg,var(--b),var(--bd));color:#fff;border-color:transparent}.navBadge{min-width:25px;height:25px;padding:0 7px;border-radius:999px;display:none;place-items:center;background:#f5369d;color:#fff;font-size:.72rem;font-weight:900;box-shadow:0 5px 12px rgba(245,54,157,.22)}.sideFoot{margin-top:auto;display:grid;gap:9px}.sideFoot button,.sideFoot a{padding:11px;border-radius:12px;border:1px solid var(--line);background:#fff;color:#2d4862;font-weight:900;text-align:center}.wrap{min-width:0}.top{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:14px;padding:18px 24px 10px;background:rgba(244,248,252,.92);backdrop-filter:blur(12px);position:sticky;top:0;z-index:45}.adminBrand{display:block;text-decoration:none;position:relative;z-index:70;pointer-events:auto;cursor:pointer}.adminBrand h1{font:800 2rem "Baloo 2";line-height:1;margin:3px 0;letter-spacing:-1px}.adminBrand:hover h1{transform:translateY(-1px)}.top small{font-weight:900;color:#1565ff;text-transform:uppercase}.user{background:#fff;border:1px solid var(--line);border-radius:15px;padding:10px 13px;box-shadow:var(--sh);text-align:right}.user span,.user strong{display:block}.user span{font-size:.72rem;color:var(--muted)}.menuBtn{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:13px;background:#fff;font-size:1.15rem}.main{padding:12px 24px 30px}.panel{display:none}.panel.on{display:block}.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px}.metric,.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--sh)}.metric small{display:block;color:var(--muted);font-weight:900;text-transform:uppercase;font-size:.68rem}.metric strong{display:block;font:800 2rem "Baloo 2";color:var(--ink);line-height:1.1;margin:7px 0}.metric span{font-size:.78rem;color:#6c8398}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}.head h2{margin:0;font:700 1.4rem "Baloo 2";color:var(--ink)}.chip{padding:6px 9px;border-radius:999px;background:#eef6ff;color:#0d6ca2;font-size:.7rem;font-weight:900}.green{background:#eefbf1;color:#16813a}.pink{background:#fff0f6;color:#b62572}.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.toolbar input,.toolbar select{padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:#fff}.btn{padding:10px 13px;border:1px solid var(--line);border-radius:11px;background:#fff;color:#2d4862;font-weight:900}.btn.primary{background:linear-gradient(135deg,var(--b),var(--bd));color:#fff;border-color:transparent}.btn.danger{background:#fff0f3;color:#b32c47;border-color:#ffd2db}.tableWrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:.82rem}.table th,.table td{padding:10px;border-bottom:1px solid #edf2f6;text-align:left;vertical-align:middle}.table th{font-size:.68rem;text-transform:uppercase;color:#71879b}.prodCell{display:flex;align-items:center;gap:9px;min-width:240px}.prodCell img{width:48px;height:48px;object-fit:contain;border-radius:10px;background:#f7fbff}.toggle{width:42px;height:24px;border-radius:999px;border:0;background:#ccd8e3;position:relative}.toggle:after{content:"";position:absolute;width:18px;height:18px;top:3px;left:3px;border-radius:50%;background:#fff;transition:.18s}.toggle.on{background:#35bf4f}.toggle.on:after{left:21px}.actions{display:flex;gap:6px}.mini{padding:7px 9px;border:1px solid var(--line);border-radius:9px;background:#eef6ff;color:#1565ff;font-weight:900}.mini.delete{background:#fff0f3;color:#b32c47}
-.orderFilters{display:flex;gap:7px;overflow-x:auto;margin:4px 0 14px;padding:2px 1px 8px;scrollbar-width:none}.orderFilters::-webkit-scrollbar{display:none}.orderFilter{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;padding:9px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;color:#49657e;font-weight:900;font-size:.76rem;white-space:nowrap}.orderFilter span{min-width:21px;height:21px;padding:0 6px;border-radius:999px;display:grid;place-items:center;background:#edf4f9;color:#61788d;font-size:.66rem}.orderFilter.on{background:linear-gradient(135deg,var(--b),var(--bd));color:#fff;border-color:transparent;box-shadow:0 8px 18px rgba(21,101,255,.16)}.orderFilter.on span{background:rgba(255,255,255,.2);color:#fff}.ordersList{display:grid;gap:10px}.orderRow{display:grid;grid-template-columns:minmax(190px,1.2fr) minmax(130px,.8fr) minmax(120px,.7fr) auto;gap:12px;align-items:center;padding:13px;border:1px solid var(--line);border-radius:15px;background:#fff;box-shadow:0 6px 18px rgba(16,66,115,.04)}.orderRowMain code{font-weight:900;color:#1565ff}.orderRowMain h3{margin:4px 0 2px;color:var(--ink);font-size:.95rem}.orderRowMain p,.orderRowMeta p{margin:2px 0;color:#6b8195;font-size:.76rem}.statusTag{display:inline-flex;padding:6px 9px;border-radius:999px;background:#eef6ff;color:#1565ff;font-size:.7rem;font-weight:900}.statusTag.ready{background:#eefbf1;color:#16813a}.statusTag.done{background:#f2f3f5;color:#536879}.statusTag.cancelled{background:#fff0f3;color:#b32c47}.orderRowActions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.orderRowActions button{padding:8px 10px;border-radius:9px;border:1px solid var(--line);background:#f7fbff;color:#2d4862;font-size:.74rem;font-weight:900}.orderRowActions button.next{background:linear-gradient(135deg,var(--b),var(--bd));color:#fff;border-color:transparent}.orderRowActions button:disabled{opacity:1;cursor:not-allowed}.orderRowActions button.next:disabled{background:#edf2f6;color:#8191a0;border-color:#dce7ef}.orderCard{background:#fff;border:1px solid var(--line);border-radius:15px;padding:12px;margin-bottom:9px;box-shadow:0 7px 16px rgba(16,66,115,.05)}.orderCard code{display:inline-block;font-weight:900;color:#1565ff}.orderCard h3{margin:6px 0 3px;color:var(--ink);font-size:.95rem}.orderCard p{margin:3px 0;color:#6b8195;font-size:.76rem}.orderCard .buttons{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}.orderCard button{padding:8px;border-radius:9px;border:1px solid var(--line);background:#f7fbff;color:#2d4862;font-size:.75rem;font-weight:900}.orderCard button.next{background:linear-gradient(135deg,var(--b),var(--bd));color:#fff;border-color:transparent}.orderCard button:disabled{opacity:.55;cursor:not-allowed}
-.clientId{font-family:monospace;font-size:.75rem}.events{list-style:none;margin:0;padding:0;display:grid;gap:8px}.events li{padding:11px;border:1px solid #edf2f6;border-radius:12px;background:#f9fcff}.events strong{color:var(--ink)}.events span{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}.empty{padding:28px;text-align:center;color:var(--muted)}.loading{display:none!important}.loading.hide{display:none!important}.loader{width:48px;height:48px;border:5px solid #d9e8f5;border-top-color:#1565ff;border-radius:50%;animation:spin .75s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,120px);background:#103651;color:#fff;padding:11px 16px;border-radius:12px;font-weight:900;transition:.2s;z-index:120}.toast.show{transform:translate(-50%,0)}
-dialog{border:0;padding:0;border-radius:22px;max-width:min(680px,calc(100% - 18px));width:min(680px,calc(100% - 18px));box-shadow:0 40px 100px rgba(0,0,0,.3)}dialog::backdrop{background:rgba(10,24,39,.6)}.modal{padding:22px}.modal h2{font:800 1.8rem "Baloo 2";color:var(--ink);margin:0 0 14px}.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.formGrid .full{grid-column:1/-1}.modal label{display:block;font-size:.76rem;font-weight:900;color:#2d4862;margin-bottom:4px}.modal input,.modal textarea,.modal select{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px}.modal textarea{min-height:95px;resize:vertical}.modalActions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}.modalActions button{padding:10px 14px;border-radius:11px;border:1px solid var(--line);font-weight:900}.save{background:linear-gradient(135deg,var(--b),var(--bd));color:#fff;border:0!important}.orderDetailGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.infoBox{padding:12px;border:1px solid var(--line);border-radius:12px;background:#f9fcff}.infoBox small{display:block;color:var(--muted);font-weight:900;text-transform:uppercase;font-size:.64rem}.infoBox strong{display:block;color:var(--ink);margin-top:3px}.orderItems{margin-top:13px;display:grid;gap:7px}.orderItem{display:flex;justify-content:space-between;gap:10px;padding:9px;border-bottom:1px solid #edf2f6}.timeline{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px}.timeline li{padding:10px 12px;border-left:4px solid #d4e0ea;background:#f9fcff;border-radius:10px}.timeline li strong{color:var(--ink)}.timeline li span{display:block;color:var(--muted);font-size:.76rem}.detailActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.detailActions button{padding:10px 13px;border-radius:10px;border:1px solid var(--line);font-weight:900}.nextStatus{background:linear-gradient(135deg,var(--b),var(--bd));color:#fff;border:0!important}.cancelOrder{background:#fff0f3;color:#b32c47}
-@media(max-width:1200px){.metrics{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:1000px){.shell{grid-template-columns:1fr}.side{position:fixed;left:0;top:0;bottom:0;width:min(290px,84vw);height:auto;transform:translateX(-110%);transition:transform .32s cubic-bezier(.22,.8,.24,1);z-index:92;box-shadow:0 24px 60px rgba(16,50,83,.24);will-change:transform}.side.open{transform:translateX(0)}.sideBackdrop{display:block;position:fixed;inset:0;z-index:91;border:0;background:rgba(10,28,44,.28);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .25s ease}.sideBackdrop.show{opacity:1;pointer-events:auto}.menuBtn{display:block}.grid2{grid-template-columns:1fr}.orderRow{grid-template-columns:1fr 1fr auto}.orderRowMain{grid-column:1/-1}.orderRowActions{grid-column:1/-1;justify-content:flex-start}}
-@media(max-width:680px){.top{grid-template-columns:1fr auto;padding:13px 12px 8px}.adminBrand{grid-column:1;grid-row:1}.menuBtn{grid-column:2;grid-row:1;justify-self:end}.adminBrand h1{font-size:1.55rem}.user{display:none}.main{padding:9px 10px 24px}.metrics{grid-template-columns:repeat(2,1fr);gap:8px}.metric{padding:13px;border-radius:17px}.metric strong{font-size:1.65rem}.metric small{font-size:.6rem}.formGrid,.orderDetailGrid{grid-template-columns:1fr}.formGrid .full{grid-column:auto}.head{align-items:flex-start;flex-direction:column}.head .toolbar{width:100%}.toolbar input{width:100%}.card{padding:13px;border-radius:18px}.orderFilters{display:flex;margin-right:-3px}.orderRow{grid-template-columns:1fr;padding:11px}.orderRowMain,.orderRowActions{grid-column:auto}.orderRowActions{justify-content:stretch}.orderRowActions button{flex:1}}
+:root{--b:#1565ff;--bd:#0d49d6;--p:#f5369d;--g:#35bf4f;--r:#e04b62;--ink:#172541;--txt:#455c73;--muted:#72879d;--line:#dbe6ef;--soft:#f4f8fc;--sh:0 14px 34px rgba(16,66,115,.09)}
+*{box-sizing:border-box}html{background:var(--soft)}body{margin:0;font-family:Nunito,system-ui,sans-serif;background:var(--soft);color:var(--txt)}button,input,textarea,select{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed}a{text-decoration:none;color:inherit}
+.shell{display:grid;grid-template-columns:270px minmax(0,1fr);min-height:100vh}.side{background:#fff;border-right:1px solid var(--line);padding:22px;display:flex;flex-direction:column;gap:20px;position:sticky;top:0;height:100vh;z-index:92}.sideBackdrop{display:none}.logo{font:800 1.75rem "Baloo 2";letter-spacing:-1.1px;display:block}.m{color:#f5369d}.u{color:#ff972e}.n{color:#35bf4f}.d{color:#8f52f1}.o{color:#e7b000}.k{color:#1565ff}.logo small{display:block;font:900 .58rem Nunito;letter-spacing:2px;color:#63809a;margin-top:6px}
+.nav{display:grid;gap:8px}.tab{border:1px solid var(--line);border-radius:14px;padding:13px 14px;background:#f7fbff;text-align:left;color:#29445d;font-weight:900;display:flex;align-items:center;justify-content:space-between;gap:8px}.tab.on{background:linear-gradient(135deg,var(--b),var(--bd));color:#fff;border-color:transparent}.navBadge{min-width:25px;height:25px;padding:0 7px;border-radius:999px;display:none;place-items:center;background:var(--p);color:#fff;font-size:.72rem;font-weight:900}.sideFoot{margin-top:auto;display:grid;gap:9px}.sideFoot button,.sideFoot a{padding:11px;border-radius:12px;border:1px solid var(--line);background:#fff;color:#2d4862;font-weight:900;text-align:center}
+.wrap{min-width:0}.top{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:14px;padding:18px 24px 10px;background:rgba(244,248,252,.94);backdrop-filter:blur(12px);position:sticky;top:0;z-index:45}.adminBrand h1{font:800 2rem "Baloo 2";line-height:1;margin:3px 0;letter-spacing:-1px}.top small{font-weight:900;color:var(--b);text-transform:uppercase}.user{background:#fff;border:1px solid var(--line);border-radius:15px;padding:10px 13px;box-shadow:var(--sh);text-align:right}.user span,.user strong{display:block}.user span{font-size:.72rem;color:var(--muted)}.menuBtn{display:none;width:46px;height:46px;border:1px solid var(--line);border-radius:13px;background:#fff;font-size:1.25rem;color:#29445d}
+.main{padding:12px 24px 30px}.panel{display:none}.panel.on{display:block}.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px}.metric,.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--sh)}.metric small{display:block;color:var(--muted);font-weight:900;text-transform:uppercase;font-size:.68rem}.metric strong{display:block;font:800 2rem "Baloo 2";color:var(--ink);line-height:1.1;margin:7px 0}.metric span{font-size:.78rem;color:#6c8398}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}.head h2{margin:0;font:700 1.4rem "Baloo 2";color:var(--ink)}.chip{padding:6px 9px;border-radius:999px;background:#eef6ff;color:#0d6ca2;font-size:.7rem;font-weight:900}.green{background:#eefbf1;color:#16813a}.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.toolbar input,.toolbar select{padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:#fff}.btn{padding:10px 13px;border:1px solid var(--line);border-radius:11px;background:#fff;color:#2d4862;font-weight:900}.btn.primary{background:linear-gradient(135deg,var(--b),var(--bd));color:#fff;border-color:transparent}.btn.danger{background:#fff0f3;color:#b32c47;border-color:#ffd2db}
+.tableWrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:.82rem}.table th,.table td{padding:10px;border-bottom:1px solid #edf2f6;text-align:left;vertical-align:middle}.table th{font-size:.68rem;text-transform:uppercase;color:#71879b}.prodCell{display:flex;align-items:center;gap:9px;min-width:240px}.prodCell img{width:48px;height:48px;object-fit:contain;border-radius:10px;background:#f7fbff}.toggle{width:42px;height:24px;border-radius:999px;border:0;background:#ccd8e3;position:relative}.toggle:after{content:"";position:absolute;width:18px;height:18px;top:3px;left:3px;border-radius:50%;background:#fff;transition:.18s}.toggle.on{background:var(--g)}.toggle.on:after{left:21px}.actions{display:flex;gap:6px}.mini{padding:7px 9px;border:1px solid var(--line);border-radius:9px;background:#eef6ff;color:var(--b);font-weight:900}.mini.delete{background:#fff0f3;color:#b32c47}
+.orderFilters{display:flex;gap:7px;overflow-x:auto;margin:4px 0 14px;padding:2px 1px 8px;scrollbar-width:none}.orderFilters::-webkit-scrollbar{display:none}.orderFilter{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;padding:9px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;color:#49657e;font-weight:900;font-size:.76rem}.orderFilter span{min-width:21px;height:21px;padding:0 6px;border-radius:999px;display:grid;place-items:center;background:#edf4f9;color:#61788d;font-size:.66rem}.orderFilter.on{background:linear-gradient(135deg,var(--b),var(--bd));color:#fff;border-color:transparent}.orderFilter.on span{background:rgba(255,255,255,.2);color:#fff}.ordersList{display:grid;gap:10px}.orderRow{display:grid;grid-template-columns:minmax(190px,1.2fr) minmax(130px,.8fr) minmax(120px,.7fr) auto;gap:12px;align-items:center;padding:13px;border:1px solid var(--line);border-radius:15px;background:#fff}.orderRowMain code{font-weight:900;color:var(--b)}.orderRowMain h3{margin:4px 0 2px;color:var(--ink);font-size:.95rem}.orderRowMain p,.orderRowMeta p{margin:2px 0;color:#6b8195;font-size:.76rem}.statusTag{display:inline-flex;padding:6px 9px;border-radius:999px;background:#eef6ff;color:var(--b);font-size:.7rem;font-weight:900}.statusTag.ready{background:#eefbf1;color:#16813a}.statusTag.done{background:#f2f3f5;color:#536879}.statusTag.cancelled{background:#fff0f3;color:#b32c47}.orderRowActions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.orderRowActions button{padding:8px 10px;border-radius:9px;border:1px solid var(--line);background:#f7fbff;color:#2d4862;font-size:.74rem;font-weight:900}.orderRowActions button.next{background:linear-gradient(135deg,var(--b),var(--bd));color:#fff;border-color:transparent}.orderRowActions button.next:disabled{background:#edf2f6;color:#8191a0;border-color:#dce7ef}.orderCard{background:#fff;border:1px solid var(--line);border-radius:15px;padding:12px;margin-bottom:9px}.orderCard code{font-weight:900;color:var(--b)}.orderCard h3{margin:6px 0 3px;color:var(--ink);font-size:.95rem}.orderCard p{margin:3px 0;color:#6b8195;font-size:.76rem}.events{list-style:none;margin:0;padding:0;display:grid;gap:8px}.events li{padding:11px;border:1px solid #edf2f6;border-radius:12px;background:#f9fcff}.events strong{color:var(--ink)}.events span{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}.empty{padding:28px;text-align:center;color:var(--muted)}.connection{display:none;margin:0 0 14px;padding:10px 13px;border-radius:12px;background:#fff5e9;border:1px solid #ffdbad;color:#9a5c10;font-weight:800;font-size:.8rem}.connection.show{display:block}
+.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,120px);background:#103651;color:#fff;padding:11px 16px;border-radius:12px;font-weight:900;transition:.2s;z-index:120}.toast.show{transform:translate(-50%,0)}
+dialog{border:0;padding:0;border-radius:22px;max-width:min(680px,calc(100% - 18px));width:min(680px,calc(100% - 18px));box-shadow:0 40px 100px rgba(0,0,0,.3)}dialog::backdrop{background:rgba(10,24,39,.6)}.modal{padding:22px}.modal h2{font:800 1.8rem "Baloo 2";color:var(--ink);margin:0 0 14px}.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.formGrid .full{grid-column:1/-1}.modal label{display:block;font-size:.76rem;font-weight:900;color:#2d4862;margin-bottom:4px}.modal input,.modal textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px}.modal textarea{min-height:95px;resize:vertical}.modalActions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}.modalActions button{padding:10px 14px;border-radius:11px;border:1px solid var(--line);font-weight:900}.save,.nextStatus{background:linear-gradient(135deg,var(--b),var(--bd));color:#fff;border:0!important}.orderDetailGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.infoBox{padding:12px;border:1px solid var(--line);border-radius:12px;background:#f9fcff}.infoBox small{display:block;color:var(--muted);font-weight:900;text-transform:uppercase;font-size:.64rem}.infoBox strong{display:block;color:var(--ink);margin-top:3px;overflow-wrap:anywhere}.orderItems{margin-top:13px;display:grid;gap:7px}.orderItem{display:flex;justify-content:space-between;gap:10px;padding:9px;border-bottom:1px solid #edf2f6}.timeline{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px}.timeline li{padding:10px 12px;border-left:4px solid #d4e0ea;background:#f9fcff;border-radius:10px}.timeline li strong{color:var(--ink)}.timeline li span{display:block;color:var(--muted);font-size:.76rem}.detailActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.detailActions button{padding:10px 13px;border-radius:10px;border:1px solid var(--line);font-weight:900}.cancelOrder{background:#fff0f3;color:#b32c47}
+@media(max-width:1200px){.metrics{grid-template-columns:repeat(3,1fr)}}@media(max-width:1000px){.shell{grid-template-columns:1fr}.side{position:fixed;left:0;top:0;bottom:0;width:min(290px,84vw);height:100dvh;transform:translateX(-110%);transition:transform .25s ease;box-shadow:0 24px 60px rgba(16,50,83,.24)}.side.open{transform:translateX(0)}.sideBackdrop{display:block;position:fixed;inset:0;z-index:91;border:0;background:rgba(10,28,44,.34);opacity:0;pointer-events:none;transition:opacity .2s}.sideBackdrop.show{opacity:1;pointer-events:auto}.menuBtn{display:block}.grid2{grid-template-columns:1fr}.orderRow{grid-template-columns:1fr 1fr}.orderRowMain,.orderRowActions{grid-column:1/-1}.orderRowActions{justify-content:flex-start}}
+@media(max-width:680px){.top{grid-template-columns:1fr auto;padding:13px 12px 8px}.adminBrand{grid-column:1}.menuBtn{grid-column:2;justify-self:end}.adminBrand h1{font-size:1.55rem}.user{display:none}.main{padding:9px 10px 24px}.metrics{grid-template-columns:repeat(2,1fr);gap:8px}.metric{padding:13px;border-radius:17px}.metric strong{font-size:1.65rem}.metric small{font-size:.6rem}.formGrid,.orderDetailGrid{grid-template-columns:1fr}.formGrid .full{grid-column:auto}.head{align-items:flex-start;flex-direction:column}.head .toolbar{width:100%}.toolbar input{width:100%}.card{padding:13px;border-radius:18px}.orderRow{grid-template-columns:1fr;padding:11px}.orderRowMain,.orderRowActions{grid-column:auto}.orderRowActions{justify-content:stretch}.orderRowActions button{flex:1}}
 </style>
 </head>
 <body>
-<div class="loading" id="loading"><div class="loader"></div></div>
 <div class="shell">
-<aside class="side" id="side"><a class="logo" href="index.html"><span class="m">M</span><span class="u">U</span><span class="n">N</span><span class="d">D</span><span class="o">O</span> <span class="k">KIDS</span><small>PAINEL ADMINISTRATIVO</small></a><nav class="nav"><button class="tab on" data-tab="overview">Visão geral</button><button class="tab" data-tab="catalog">Catálogo</button><button class="tab" data-tab="orders">Pedidos <span class="navBadge" id="orderBadge">0</span></button><button class="tab" data-tab="clients">Clientes</button><button class="tab" data-tab="events">Interações</button></nav><div class="sideFoot"><a href="index.html" target="_blank">Abrir loja</a><button id="refresh">Atualizar dados</button><button id="logout">Sair</button></div></aside>
+<aside class="side" id="side">
+  <a class="logo" href="index.html"><span class="m">M</span><span class="u">U</span><span class="n">N</span><span class="d">D</span><span class="o">O</span> <span class="k">KIDS</span><small>PAINEL ADMINISTRATIVO</small></a>
+  <nav class="nav">
+    <button class="tab on" data-tab="overview">Visão geral</button>
+    <button class="tab" data-tab="catalog">Catálogo</button>
+    <button class="tab" data-tab="orders">Pedidos <span class="navBadge" id="orderBadge">0</span></button>
+    <button class="tab" data-tab="clients">Clientes</button>
+    <button class="tab" data-tab="events">Interações</button>
+  </nav>
+  <div class="sideFoot"><a href="index.html" target="_blank" rel="noopener">Abrir loja</a><button id="refresh">Atualizar dados</button><button id="logout">Sair</button></div>
+</aside>
 <button class="sideBackdrop" id="sideBackdrop" type="button" aria-label="Fechar menu"></button>
-<div class="wrap"><header class="top"><a class="adminBrand" id="adminStoreLink" href="https://lucasjanoca.github.io/Mundo-Kids/" aria-label="Voltar para a loja Mundo Kids"><small>Administração</small><h1><span class="m">M</span><span class="u">U</span><span class="n">N</span><span class="d">D</span><span class="o">O</span> <span class="k">KIDS</span></h1></a><div class="user"><span>Administrador</span><strong id="adminEmail">Carregando...</strong></div><button class="menuBtn" id="menuBtn" aria-label="Abrir menu">☰</button></header>
+
+<div class="wrap">
+<header class="top">
+  <a class="adminBrand" href="index.html"><small>Administração</small><h1><span class="m">M</span><span class="u">U</span><span class="n">N</span><span class="d">D</span><span class="o">O</span> <span class="k">KIDS</span></h1></a>
+  <div class="user"><span>Administrador</span><strong id="adminEmail">Verificando...</strong></div>
+  <button class="menuBtn" id="menuBtn" type="button" aria-label="Abrir menu" aria-expanded="false">☰</button>
+</header>
+
 <main class="main">
-<section class="panel on" data-panel="overview"><div class="metrics"><article class="metric"><small>Pedidos abertos</small><strong id="mOpen">0</strong><span>aguardando conclusão</span></article><article class="metric"><small>Prontos</small><strong id="mReady">0</strong><span>aguardando retirada</span></article><article class="metric"><small>Produtos</small><strong id="mProducts">0</strong><span>visíveis no catálogo</span></article><article class="metric"><small>Clientes</small><strong id="mCustomers">0</strong><span>com interação real</span></article><article class="metric"><small>Visitantes</small><strong id="mVisitors">0</strong><span>navegadores únicos</span></article></div><div class="grid2"><article class="card"><div class="head"><h2>Pedidos recentes</h2><span class="chip green">Ao vivo</span></div><div id="recentOrders"></div></article><article class="card"><div class="head"><h2>Atividade recente</h2><span class="chip">Site</span></div><ul class="events" id="recentOverview"></ul></article></div></section>
+<div class="connection" id="connection"></div>
 
-<section class="panel" data-panel="catalog"><article class="card"><div class="head"><h2>Catálogo</h2><div class="toolbar"><input id="catalogSearch" placeholder="Buscar produto"><button class="btn primary" id="newProduct">+ Novo produto</button></div></div><div class="tableWrap"><table class="table"><thead><tr><th>Produto</th><th>Preço</th><th>Visível</th><th>Ações</th></tr></thead><tbody id="catalogRows"></tbody></table></div></article></section>
+<section class="panel on" data-panel="overview">
+  <div class="metrics">
+    <article class="metric"><small>Pedidos abertos</small><strong id="mOpen">0</strong><span>aguardando conclusão</span></article>
+    <article class="metric"><small>Prontos</small><strong id="mReady">0</strong><span>aguardando retirada</span></article>
+    <article class="metric"><small>Produtos</small><strong id="mProducts">0</strong><span>visíveis no catálogo</span></article>
+    <article class="metric"><small>Clientes</small><strong id="mCustomers">0</strong><span>com interação real</span></article>
+    <article class="metric"><small>Visitantes</small><strong id="mVisitors">0</strong><span>navegadores únicos</span></article>
+  </div>
+  <div class="grid2">
+    <article class="card"><div class="head"><h2>Pedidos recentes</h2><span class="chip green">Ao vivo</span></div><div id="recentOrders"><div class="empty">Carregando...</div></div></article>
+    <article class="card"><div class="head"><h2>Atividade recente</h2><span class="chip">Site</span></div><ul class="events" id="recentOverview"><li class="empty">Carregando...</li></ul></article>
+  </div>
+</section>
 
-<section class="panel" data-panel="orders"><article class="card"><div class="head"><div><h2>Pedidos</h2><span class="chip green">Gerencie tudo em uma única tela</span></div><div class="toolbar"><input id="orderSearch" placeholder="Buscar código, cliente ou telefone"><button class="btn" id="reloadOrders">Atualizar</button></div></div><div class="orderFilters" id="orderFilters">
-  <button class="orderFilter on" data-order-filter="all">Todos <span data-order-count="all">0</span></button>
-  <button class="orderFilter" data-order-filter="received">Recebido <span data-order-count="received">0</span></button>
-  <button class="orderFilter" data-order-filter="seen">Visto <span data-order-count="seen">0</span></button>
-  <button class="orderFilter" data-order-filter="confirmed">Confirmado <span data-order-count="confirmed">0</span></button>
-  <button class="orderFilter" data-order-filter="preparing">Em preparo <span data-order-count="preparing">0</span></button>
-  <button class="orderFilter" data-order-filter="ready">Pronto <span data-order-count="ready">0</span></button>
-  <button class="orderFilter" data-order-filter="picked_up">Retirado <span data-order-count="picked_up">0</span></button>
-  <button class="orderFilter" data-order-filter="cancelled">Cancelado <span data-order-count="cancelled">0</span></button>
-</div><div class="ordersList" id="ordersList"></div></article></section>
+<section class="panel" data-panel="catalog"><article class="card">
+  <div class="head"><h2>Catálogo</h2><div class="toolbar"><input id="catalogSearch" placeholder="Buscar produto"><button class="btn primary" id="newProduct">+ Novo produto</button></div></div>
+  <div class="tableWrap"><table class="table"><thead><tr><th>Produto</th><th>Preço</th><th>Visível</th><th>Ações</th></tr></thead><tbody id="catalogRows"><tr><td colspan="4" class="empty">Carregando...</td></tr></tbody></table></div>
+</article></section>
+
+<section class="panel" data-panel="orders"><article class="card">
+  <div class="head"><div><h2>Pedidos</h2><span class="chip green">Conectado ao site dos clientes</span></div><div class="toolbar"><input id="orderSearch" placeholder="Buscar código, cliente ou telefone"><button class="btn" id="reloadOrders">Atualizar</button></div></div>
+  <div class="orderFilters">
+    <button class="orderFilter on" data-order-filter="all">Todos <span data-order-count="all">0</span></button>
+    <button class="orderFilter" data-order-filter="received">Recebido <span data-order-count="received">0</span></button>
+    <button class="orderFilter" data-order-filter="seen">Visto <span data-order-count="seen">0</span></button>
+    <button class="orderFilter" data-order-filter="confirmed">Confirmado <span data-order-count="confirmed">0</span></button>
+    <button class="orderFilter" data-order-filter="preparing">Em preparo <span data-order-count="preparing">0</span></button>
+    <button class="orderFilter" data-order-filter="ready">Pronto <span data-order-count="ready">0</span></button>
+    <button class="orderFilter" data-order-filter="picked_up">Retirado <span data-order-count="picked_up">0</span></button>
+    <button class="orderFilter" data-order-filter="cancelled">Cancelado <span data-order-count="cancelled">0</span></button>
+  </div>
+  <div class="ordersList" id="ordersList"><div class="empty">Carregando...</div></div>
+</article></section>
 
 <section class="panel" data-panel="clients"><article class="card"><div class="head"><h2>Clientes e visitantes</h2><span class="chip">Dados reais do site</span></div><div class="tableWrap"><table class="table"><thead><tr><th>Cliente</th><th>Interações</th><th>Contatos</th><th>Pedidos</th><th>Última visita</th></tr></thead><tbody id="clientRows"></tbody></table></div></article></section>
-
 <section class="panel" data-panel="events"><article class="card"><div class="head"><h2>Interações recentes</h2><span class="chip">Tempo real</span></div><ul class="events" id="eventRows"></ul></article></section>
-</main></div></div>
+</main>
+</div>
+</div>
+
 <div class="toast" id="toast"></div>
 
-<dialog id="productModal"><form class="modal" id="productForm"><h2 id="productModalTitle">Novo produto</h2><input type="hidden" id="pId"><div class="formGrid"><div class="full"><label>Nome</label><input id="pName" required></div><div><label>Categoria</label><input id="pCategory" placeholder="pokemon jogos presentes" required></div><div><label>Rótulo</label><input id="pLabel" placeholder="Pokémon" required></div><div><label>Idade</label><input id="pAge" placeholder="6+ anos" required></div><div><label>Preço (opcional)</label><input id="pPrice" type="number" min="0" step="0.01" placeholder="99.90"></div><div class="full"><label>URL da imagem</label><input id="pImage" type="url" required></div><div class="full"><label>Descrição</label><textarea id="pDescription" required></textarea></div></div><div class="modalActions"><button type="button" data-close="productModal">Cancelar</button><button class="save">Salvar produto</button></div></form></dialog>
+<dialog id="productModal"><form class="modal" id="productForm">
+<h2 id="productModalTitle">Novo produto</h2><input type="hidden" id="pId">
+<div class="formGrid">
+  <div class="full"><label>Nome</label><input id="pName" required></div>
+  <div><label>Categoria</label><input id="pCategory" required></div>
+  <div><label>Rótulo</label><input id="pLabel" required></div>
+  <div><label>Idade</label><input id="pAge" required></div>
+  <div><label>Preço (opcional)</label><input id="pPrice" type="number" min="0" step="0.01"></div>
+  <div class="full"><label>URL da imagem</label><input id="pImage" type="url" required></div>
+  <div class="full"><label>Descrição</label><textarea id="pDescription" required></textarea></div>
+</div>
+<div class="modalActions"><button type="button" data-close="productModal">Cancelar</button><button class="save">Salvar produto</button></div>
+</form></dialog>
 
-<dialog id="orderModal"><div class="modal"><h2 id="orderTitle">Pedido</h2><div class="orderDetailGrid" id="orderInfo"></div><div class="orderItems" id="orderItems"></div><ul class="timeline" id="orderTimeline"></ul><div class="detailActions"><button class="nextStatus" id="orderNext">Avançar status</button><button class="cancelOrder" id="orderCancel">Cancelar pedido</button><button class="btn" data-close="orderModal">Fechar</button></div></div></dialog>
+<dialog id="orderModal"><div class="modal">
+<h2 id="orderTitle">Pedido</h2><div class="orderDetailGrid" id="orderInfo"></div><div class="orderItems" id="orderItems"></div><ul class="timeline" id="orderTimeline"></ul>
+<div class="detailActions"><button class="nextStatus" id="orderNext">Avançar status</button><button class="cancelOrder" id="orderCancel">Cancelar pedido</button><button class="btn" data-close="orderModal">Fechar</button></div>
+</div></dialog>
 
 <script>
-const AUTH_URL="https://rgngqumqzylthdiazvfu.supabase.co",AUTH_KEY="sb_publishable_Nw2oaGdMQHVIJNhUpjv5ag_JcxmRu2w",API="https://yncspxfsvlqdnodlsosb.supabase.co/functions/v1/mundo-kids-api";
+const AUTH_URL="https://rgngqumqzylthdiazvfu.supabase.co";
+const AUTH_KEY="sb_publishable_Nw2oaGdMQHVIJNhUpjv5ag_JcxmRu2w";
+const API="https://yncspxfsvlqdnodlsosb.supabase.co/functions/v1/mundo-kids-api";
 const SESSION_KEY="mundo-kids-admin-auth";
-const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const flow=["received","seen","confirmed","preparing","ready","picked_up"],labels={received:"Recebido",seen:"Visto",confirmed:"Confirmado",preparing:"Em preparo",ready:"Pronto",picked_up:"Retirado",cancelled:"Cancelado"};
-let dashboard=null,orders=[],session=null,timer,currentOrder=null,knownOrderIds=new Set(),firstLoad=true,orderGroup="all";
-setTimeout(()=>{document.getElementById("loading")?.classList.add("hide")},7500);
-function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("show");clearTimeout(timer);timer=setTimeout(()=>e.classList.remove("show"),1900)}
-function fmt(d){return d?new Date(d).toLocaleString("pt-BR"):"-"}
-function dateOnly(d){if(!d)return"-";const [y,m,day]=String(d).split("-");return day&&m&&y?day+"/"+m+"/"+y:d}
-function short(id){return id?String(id).slice(0,8)+"…":"-"}
-function brl(v){return v===null||v===undefined||v===""?"—":Number(v).toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
+const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
+const flow=["received","seen","confirmed","preparing","ready","picked_up"];
+const labels={received:"Recebido",seen:"Visto",confirmed:"Confirmado",preparing:"Em preparo",ready:"Pronto",picked_up:"Retirado",cancelled:"Cancelado"};
+let dashboard={metrics:{orders_open:0,orders_ready:0,products_active:0,customers:0,visitors:0},products:[],clients:[],recent_events:[]};
+let orders=[],session=null,currentOrder=null,toastTimer=null,knownOrderIds=new Set(),firstLoad=true,orderGroup="all",loadingNow=false;
+
+function toast(text){const el=$("#toast");el.textContent=text;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),2200)}
 function esc(v){return String(v??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]))}
+function fmt(d){return d?new Date(d).toLocaleString("pt-BR"):"-"}
+function dateOnly(d){if(!d)return"-";const [y,m,day]=String(d).split("-");return day&&m&&y?`${day}/${m}/${y}`:String(d)}
+function brl(v){return v===null||v===undefined||v===""?"—":Number(v).toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
+function short(id){return id?String(id).slice(0,8)+"…":"-"}
 function safeImg(v){try{const u=new URL(String(v||""),location.href);return ["https:","http:"].includes(u.protocol)?u.href:""}catch{return""}}
-function storedAdminSession(){try{const raw=localStorage.getItem(SESSION_KEY);if(!raw)return null;const parsed=JSON.parse(raw);const candidate=parsed?.access_token?parsed:(parsed?.currentSession||parsed?.session||null);return candidate?.access_token?candidate:null}catch{return null}}
-function saveAdminSession(value){try{localStorage.setItem(SESSION_KEY,JSON.stringify(value))}catch{}}
+function setConnection(text=""){const el=$("#connection");el.textContent=text;el.classList.toggle("show",Boolean(text))}
+function storedAdminSession(){try{const raw=localStorage.getItem(SESSION_KEY);if(!raw)return null;const parsed=JSON.parse(raw);const s=parsed?.access_token?parsed:(parsed?.currentSession||parsed?.session||null);return s?.access_token?s:null}catch{return null}}
+function saveAdminSession(s){try{localStorage.setItem(SESSION_KEY,JSON.stringify(s))}catch{}}
 function clearAdminSession(){try{localStorage.removeItem(SESSION_KEY)}catch{}}
+async function timedFetch(url,opts={},ms=12000){const c=new AbortController(),t=setTimeout(()=>c.abort(),ms);try{return await fetch(url,{...opts,signal:c.signal,cache:"no-store"})}finally{clearTimeout(t)}}
 async function refreshAdminSession(current){
   if(!current?.refresh_token)return current;
   const expiresAt=Number(current.expires_at||0);
   if(current.access_token&&(!expiresAt||expiresAt*1000>Date.now()+60000))return current;
-  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),5000);
   try{
-    const r=await fetch(AUTH_URL+"/auth/v1/token?grant_type=refresh_token",{method:"POST",signal:controller.signal,headers:{"apikey":AUTH_KEY,"Content-Type":"application/json"},body:JSON.stringify({refresh_token:current.refresh_token})});
+    const r=await timedFetch(AUTH_URL+"/auth/v1/token?grant_type=refresh_token",{method:"POST",headers:{"apikey":AUTH_KEY,"Content-Type":"application/json"},body:JSON.stringify({refresh_token:current.refresh_token})},8000);
     if(!r.ok)return current;
-    const fresh=await r.json();
-    const next={...current,...fresh};saveAdminSession(next);return next
-  }catch{return current}finally{clearTimeout(timeout)}
+    const fresh=await r.json();const next={...current,...fresh};saveAdminSession(next);return next;
+  }catch{return current}
+}
+async function api(action,opts={}){
+  const params=opts.params||{};
+  const url=new URL(API);url.searchParams.set("action",action);Object.entries(params).forEach(([k,v])=>url.searchParams.set(k,String(v)));
+  const headers={...(opts.headers||{}),"Authorization":"Bearer "+session.access_token};
+  if(opts.body!==undefined)headers["Content-Type"]="application/json";
+  const r=await timedFetch(url.toString(),{method:opts.method||"GET",headers,body:opts.body},opts.timeout||12000);
+  const j=await r.json().catch(()=>({}));
+  if(r.status===401){clearAdminSession();location.replace("admin-login.html?v=20260904-0715");throw new Error("unauthorized")}
+  if(!r.ok)throw new Error(j.error||`http_${r.status}`);
+  return j;
 }
 async function requireAdmin(){
   session=storedAdminSession();
-  if(!session?.access_token){location.replace("admin-login.html?v=20260902-1100");return false}
+  if(!session?.access_token){location.replace("admin-login.html?v=20260904-0715");return false}
   session=await refreshAdminSession(session);
-  $("#adminEmail").textContent=session.user?.email||"Administrador";
-  return true
+  const check=await api("admin_check",{timeout:10000});
+  $("#adminEmail").textContent=check.admin?.email||session.user?.email||"Administrador";
+  return true;
 }
-async function api(action,opts={}){
-  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),6500);
+async function load({quiet=false}={}){
+  if(loadingNow)return;loadingNow=true;
   try{
-    const r=await fetch(API+"?action="+encodeURIComponent(action),{...opts,signal:controller.signal,headers:{...(opts.headers||{}),"Content-Type":"application/json","Authorization":"Bearer "+session.access_token}});
-    const j=await r.json().catch(()=>({}));
-    if(r.status===401){clearAdminSession();location.replace("admin-login.html?v=20260902-1100");throw new Error("unauthorized")}
-    if(!r.ok)throw new Error(j.error||"Erro");
-    return j
-  }finally{clearTimeout(timeout)}
+    const [dRes,oRes]=await Promise.allSettled([api("dashboard",{timeout:14000}),api("orders",{timeout:18000})]);
+    if(dRes.status==="fulfilled")dashboard=dRes.value;
+    if(oRes.status==="fulfilled"){
+      const incoming=oRes.value.orders||[];
+      if(!firstLoad){
+        const fresh=incoming.filter(x=>!knownOrderIds.has(x.id));
+        if(fresh.length){toast(fresh.length===1?"Novo pedido recebido!":`${fresh.length} novos pedidos recebidos!`);if(navigator.vibrate)navigator.vibrate([100,60,100])}
+      }
+      orders=incoming;knownOrderIds=new Set(orders.map(x=>x.id));firstLoad=false;
+    }else if(dRes.status==="fulfilled"&&Array.isArray(dRes.value.orders)){
+      orders=dRes.value.orders.map(o=>({...o,items:o.items||[],timeline:o.timeline||[]}));
+    }
+    if(dRes.status==="rejected"&&oRes.status==="rejected")throw dRes.reason||oRes.reason;
+    setConnection(dRes.status==="rejected"||oRes.status==="rejected"?"Alguns dados demoraram para responder. O painel continuará tentando atualizar automaticamente.":"");
+    render();
+    if(!quiet&&dRes.status==="fulfilled"&&oRes.status==="fulfilled")toast("Dados atualizados.");
+  }catch(e){
+    console.error(e);
+    if(e?.message!=="unauthorized"){setConnection("Não foi possível atualizar agora. Verifique a conexão e toque em “Atualizar dados”.");render()}
+  }finally{loadingNow=false}
 }
-function emptyDashboard(){return{metrics:{orders_open:0,orders_ready:0,products_active:0,customers:0,visitors:0},products:[],clients:[],recent_events:[]}}
-async function load(){try{const [d,o]=await Promise.all([api("dashboard"),api("orders")]);dashboard=d;const incomingOrders=o.orders||[];if(!firstLoad){const fresh=incomingOrders.filter(x=>!knownOrderIds.has(x.id));if(fresh.length){toast(fresh.length===1?"Novo pedido recebido!":fresh.length+" novos pedidos recebidos!");if(navigator.vibrate)navigator.vibrate([120,70,120]);const oldTitle=document.title;document.title="("+fresh.length+") Novo pedido • Mundo Kids";setTimeout(()=>document.title=oldTitle,5000)}}orders=incomingOrders;knownOrderIds=new Set(orders.map(x=>x.id));firstLoad=false;render()}catch(e){console.error(e);if(e?.message!=="unauthorized"){if(!dashboard){dashboard=emptyDashboard();orders=[];render()}toast("Painel aberto. Não foi possível atualizar os dados agora.")}}finally{$("#loading").classList.add("hide")}}
-function render(){const m=dashboard.metrics;$("#mOpen").textContent=m.orders_open;$("#mReady").textContent=m.orders_ready;$("#mProducts").textContent=m.products_active;$("#mCustomers").textContent=m.customers;$("#mVisitors").textContent=m.visitors;$("#orderBadge").textContent=m.orders_open;$("#orderBadge").style.display=m.orders_open?"inline-grid":"none";renderCatalog();renderOrders();renderClients();$("#recentOverview").innerHTML=eventList(dashboard.recent_events.slice(0,6));$("#eventRows").innerHTML=eventList(dashboard.recent_events);$("#recentOrders").innerHTML=orders.slice(0,6).map(o=>'<div class="orderCard"><code>'+esc(o.order_code)+'</code><h3>'+esc(o.customer_name)+'</h3><p>'+esc(labels[o.status]||o.status)+' • '+esc(fmt(o.created_at))+'</p><button class="mini" data-order-open="'+esc(o.id)+'">Ver pedido</button></div>').join("")||'<div class="empty">Nenhum pedido recebido ainda.</div>'}
-function renderCatalog(){const q=($("#catalogSearch").value||"").toLowerCase();const rows=dashboard.products.filter(p=>(p.name+" "+p.category+" "+p.label).toLowerCase().includes(q));$("#catalogRows").innerHTML=rows.map(p=>'<tr><td><div class="prodCell"><img src="'+esc(safeImg(p.image_url))+'" alt="'+esc(p.name)+'"><div><strong>'+esc(p.name)+'</strong><br><small>'+esc(p.label)+' • '+esc(p.age)+'</small></div></div></td><td>'+esc(brl(p.price))+'</td><td><button class="toggle '+(p.active?"on":"")+'" data-active="'+esc(p.id)+'"></button></td><td><div class="actions"><button class="mini" data-edit="'+esc(p.id)+'">Editar</button><button class="mini delete" data-delete="'+esc(p.id)+'">Excluir</button></div></td></tr>').join("")||'<tr><td colspan="4" class="empty">Nenhum produto encontrado.</td></tr>'}
+function render(){
+  const m=dashboard.metrics||{};
+  $("#mOpen").textContent=Number(m.orders_open||0);$("#mReady").textContent=Number(m.orders_ready||0);$("#mProducts").textContent=Number(m.products_active||0);$("#mCustomers").textContent=Number(m.customers||0);$("#mVisitors").textContent=Number(m.visitors||0);
+  $("#orderBadge").textContent=Number(m.orders_open||0);$("#orderBadge").style.display=Number(m.orders_open||0)?"inline-grid":"none";
+  renderCatalog();renderOrders();renderClients();
+  const recent=Array.isArray(dashboard.recent_events)?dashboard.recent_events:[];
+  $("#recentOverview").innerHTML=eventList(recent.slice(0,6));$("#eventRows").innerHTML=eventList(recent);
+  $("#recentOrders").innerHTML=orders.slice(0,6).map(o=>`<div class="orderCard"><code>${esc(o.order_code)}</code><h3>${esc(o.customer_name)}</h3><p>${esc(labels[o.status]||o.status)} • ${esc(fmt(o.created_at))}</p><button class="mini" data-order-open="${esc(o.id)}">Ver pedido</button></div>`).join("")||'<div class="empty">Nenhum pedido recebido ainda.</div>';
+}
+function renderCatalog(){
+  const q=($("#catalogSearch").value||"").toLowerCase();
+  const products=Array.isArray(dashboard.products)?dashboard.products:[];
+  const rows=products.filter(p=>`${p.name||""} ${p.category||""} ${p.label||""}`.toLowerCase().includes(q));
+  $("#catalogRows").innerHTML=rows.map(p=>`<tr><td><div class="prodCell"><img src="${esc(safeImg(p.image_url))}" alt="${esc(p.name)}"><div><strong>${esc(p.name)}</strong><br><small>${esc(p.label)} • ${esc(p.age)}</small></div></div></td><td>${esc(brl(p.price))}</td><td><button class="toggle ${p.active?"on":""}" data-active="${esc(p.id)}" aria-label="Alternar visibilidade"></button></td><td><div class="actions"><button class="mini" data-edit="${esc(p.id)}">Editar</button><button class="mini delete" data-delete="${esc(p.id)}">Excluir</button></div></td></tr>`).join("")||'<tr><td colspan="4" class="empty">Nenhum produto encontrado.</td></tr>';
+}
 function orderMatchesGroup(o){return orderGroup==="all"||o.status===orderGroup}
-function renderOrders(){const q=($("#orderSearch").value||"").toLowerCase();const filtered=orders.filter(o=>(o.order_code+" "+o.customer_name+" "+o.phone+" "+(o.customer_email||"")).toLowerCase().includes(q)&&orderMatchesGroup(o));$("#ordersList").innerHTML=filtered.map(orderRow).join("")||'<div class="empty">Nenhum pedido nesta etapa.</div>';document.querySelectorAll("[data-order-filter]").forEach(b=>b.classList.toggle("on",b.dataset.orderFilter===orderGroup));const counts={all:orders.length,received:0,seen:0,confirmed:0,preparing:0,ready:0,picked_up:0,cancelled:0};orders.forEach(o=>{if(counts[o.status]!==undefined)counts[o.status]++});document.querySelectorAll("[data-order-count]").forEach(s=>s.textContent=counts[s.dataset.orderCount]||0)}
-function orderRow(o){const idx=flow.indexOf(o.status),next=idx>=0?flow[idx+1]:null,cls=o.status==="ready"?"ready":o.status==="picked_up"?"done":o.status==="cancelled"?"cancelled":"";return '<article class="orderRow"><div class="orderRowMain"><code>'+esc(o.order_code)+'</code><h3>'+esc(o.customer_name)+'</h3><p>'+esc(o.customer_email||"")+(o.phone?" • "+esc(o.phone):"")+'</p></div><div class="orderRowMeta"><span class="statusTag '+cls+'">'+esc(labels[o.status]||o.status)+'</span><p>'+esc(fmt(o.created_at))+'</p></div><div class="orderRowMeta"><p><strong>'+(o.items?.reduce((s,i)=>s+i.qty,0)||0)+' item(ns)</strong></p><p>'+esc(o.pickup_date?"Retirada "+dateOnly(o.pickup_date):"Retirada a combinar")+'</p></div><div class="orderRowActions"><button data-order-open="'+esc(o.id)+'">Detalhes</button><button class="next" data-order-next="'+esc(o.id)+'" '+(!next?'disabled':'')+'>'+(next?"→ "+esc(labels[next]):(o.status==="cancelled"?"Cancelado":"Concluído"))+'</button></div></article>'}
-function renderClients(){$("#clientRows").innerHTML=dashboard.clients.map(c=>'<tr><td><strong>'+esc(c.name||short(c.client_id))+'</strong>'+(c.email?'<br><small>'+esc(c.email)+'</small>':'')+'</td><td>'+Number(c.interactions||0)+'</td><td><strong>'+Number(c.contacts||0)+'</strong></td><td>'+Number(c.orders||0)+'</td><td>'+esc(fmt(c.last_seen))+'</td></tr>').join("")||'<tr><td colspan="5" class="empty">Nenhum cliente registrado ainda.</td></tr>'}
-function eventList(list){const names=new Map(dashboard.products.map(p=>[p.id,p.name]));const map={page_view:"Visita ao site",product_view:"Visualizou produto",whatsapp:"Abriu WhatsApp",gift:"Pediu sugestão",add_cart:"Adicionou ao pedido",order_created:"Criou pedido",order_track:"Acompanhou pedido"};return list.map(e=>'<li><strong>'+esc(map[e.event_type]||e.event_type)+'</strong><span>'+esc(short(e.client_id))+(e.product_id?" • "+esc(names.get(e.product_id)||e.product_id):"")+" • "+esc(fmt(e.created_at))+'</span></li>').join("")||'<li class="empty">Nenhuma interação registrada ainda.</li>'}
-async function saveProduct(id,patch){try{await api("product",{method:"PATCH",body:JSON.stringify({id,...patch})});toast("Produto atualizado.");await load()}catch(e){console.error(e);toast("Não foi possível salvar.")}}
-function openProductModal(p=null){$("#productModalTitle").textContent=p?"Editar produto":"Novo produto";$("#pId").value=p?.id||"";$("#pName").value=p?.name||"";$("#pCategory").value=p?.category||"";$("#pLabel").value=p?.label||"";$("#pAge").value=p?.age||"";$("#pPrice").value=p?.price??"";$("#pImage").value=p?.image_url||"";$("#pDescription").value=p?.description||"";$("#productModal").showModal()}
-async function openOrder(id){
-  currentOrder=orders.find(o=>o.id===id);if(!currentOrder)return;
-  if(currentOrder.status==="received"){
-    try{await api("order_status",{method:"PATCH",body:JSON.stringify({id:currentOrder.id,status:"seen",note:"Pedido aberto no painel administrativo."})});await load();currentOrder=orders.find(o=>o.id===id)||currentOrder}catch(e){console.error(e)}
-  }
-  $("#orderTitle").textContent=currentOrder.order_code+" • "+(labels[currentOrder.status]||currentOrder.status);
-  $("#orderInfo").innerHTML=
-    '<div class="infoBox"><small>Cliente</small><strong>'+esc(currentOrder.customer_name)+'</strong></div>'+
-    '<div class="infoBox"><small>WhatsApp</small><strong>'+esc(currentOrder.phone)+'</strong></div>'+
-    '<div class="infoBox"><small>E-mail</small><strong>'+esc(currentOrder.customer_email||"-")+'</strong></div>'+
-    '<div class="infoBox"><small>Retirada</small><strong>'+esc((currentOrder.pickup_date?dateOnly(currentOrder.pickup_date):"A combinar")+" "+(currentOrder.pickup_time||""))+'</strong></div>'+
-    '<div class="infoBox"><small>Pagamento</small><strong>'+esc(currentOrder.payment_method)+'</strong></div>'+
-    '<div class="infoBox"><small>Criado em</small><strong>'+esc(fmt(currentOrder.created_at))+'</strong></div>'+
-    '<div class="infoBox"><small>Status</small><strong>'+esc(labels[currentOrder.status]||currentOrder.status)+'</strong></div>';
-  $("#orderItems").innerHTML='<strong>Itens</strong>'+currentOrder.items.map(i=>'<div class="orderItem"><span>'+Number(i.qty||0)+'× '+esc(i.product_name)+'</span><strong>'+esc(brl(i.unit_price))+'</strong></div>').join("")+(currentOrder.notes?'<div class="infoBox"><small>Observações</small><strong>'+esc(currentOrder.notes)+'</strong></div>':"");
-  $("#orderTimeline").innerHTML=currentOrder.timeline.map(t=>'<li><strong>'+esc(labels[t.status]||t.status)+'</strong><span>'+esc(fmt(t.created_at)+(t.note?" • "+t.note:""))+'</span></li>').join("");
-  const idx=flow.indexOf(currentOrder.status),next=idx>=0?flow[idx+1]:null;
-  $("#orderNext").disabled=!next||currentOrder.status==="cancelled";
-  $("#orderNext").textContent=next?"Avançar para "+labels[next]:(currentOrder.status==="cancelled"?"Pedido cancelado":"Pedido concluído");
-  $("#orderCancel").style.display=["picked_up","cancelled"].includes(currentOrder.status)?"none":"inline-block";
-  $("#orderModal").showModal()
+function renderOrders(){
+  const q=($("#orderSearch").value||"").toLowerCase();
+  const filtered=orders.filter(o=>`${o.order_code||""} ${o.customer_name||""} ${o.phone||""} ${o.customer_email||""}`.toLowerCase().includes(q)&&orderMatchesGroup(o));
+  $("#ordersList").innerHTML=filtered.map(orderRow).join("")||'<div class="empty">Nenhum pedido nesta etapa.</div>';
+  $$("[data-order-filter]").forEach(b=>b.classList.toggle("on",b.dataset.orderFilter===orderGroup));
+  const counts={all:orders.length,received:0,seen:0,confirmed:0,preparing:0,ready:0,picked_up:0,cancelled:0};
+  orders.forEach(o=>{if(Object.hasOwn(counts,o.status))counts[o.status]++});
+  $$("[data-order-count]").forEach(s=>s.textContent=counts[s.dataset.orderCount]||0);
 }
-async function changeStatus(id,status,note=""){try{await api("order_status",{method:"PATCH",body:JSON.stringify({id,status,note})});toast("Status atualizado.");await load();if($("#orderModal").open){$("#orderModal").close();openOrder(id)}}catch(e){console.error(e);toast("Não foi possível alterar o status.")}}
-function setSide(open){$("#side").classList.toggle("open",open);$("#sideBackdrop").classList.toggle("show",open);$("#menuBtn").setAttribute("aria-expanded",String(open))}
-$(".tab").forEach(t=>t.onclick=()=>{$(".tab").forEach(x=>x.classList.remove("on"));$(".panel").forEach(x=>x.classList.remove("on"));t.classList.add("on");$('[data-panel="'+t.dataset.tab+'"]').classList.add("on");setSide(false)});
-$("#adminStoreLink").onclick=e=>{e.preventDefault();window.location.href="https://lucasjanoca.github.io/Mundo-Kids/"};
-$("#menuBtn").onclick=e=>{e.stopPropagation();setSide(!$("#side").classList.contains("open"))};
-$("#sideBackdrop").onclick=()=>setSide(false);
+function orderRow(o){
+  const idx=flow.indexOf(o.status),next=idx>=0?flow[idx+1]:null,cls=o.status==="ready"?"ready":o.status==="picked_up"?"done":o.status==="cancelled"?"cancelled":"";
+  const qty=(Array.isArray(o.items)?o.items:[]).reduce((s,i)=>s+Number(i.qty||0),0);
+  return `<article class="orderRow"><div class="orderRowMain"><code>${esc(o.order_code)}</code><h3>${esc(o.customer_name)}</h3><p>${esc(o.customer_email||"")}${o.phone?" • "+esc(o.phone):""}</p></div><div class="orderRowMeta"><span class="statusTag ${cls}">${esc(labels[o.status]||o.status)}</span><p>${esc(fmt(o.created_at))}</p></div><div class="orderRowMeta"><p><strong>${qty} item(ns)</strong></p><p>${esc(o.pickup_date?"Retirada "+dateOnly(o.pickup_date):"Retirada a combinar")}</p></div><div class="orderRowActions"><button data-order-open="${esc(o.id)}">Detalhes</button><button class="next" data-order-next="${esc(o.id)}" ${!next?"disabled":""}>${next?"→ "+esc(labels[next]):o.status==="cancelled"?"Cancelado":"Concluído"}</button></div></article>`;
+}
+function renderClients(){
+  const clients=Array.isArray(dashboard.clients)?dashboard.clients:[];
+  $("#clientRows").innerHTML=clients.map(c=>`<tr><td><strong>${esc(c.name||short(c.client_id))}</strong>${c.email?`<br><small>${esc(c.email)}</small>`:""}</td><td>${Number(c.interactions||0)}</td><td><strong>${Number(c.contacts||0)}</strong></td><td>${Number(c.orders||0)}</td><td>${esc(fmt(c.last_seen))}</td></tr>`).join("")||'<tr><td colspan="5" class="empty">Nenhum cliente registrado ainda.</td></tr>';
+}
+function eventList(list){
+  const names=new Map((dashboard.products||[]).map(p=>[p.id,p.name]));
+  const map={page_view:"Visita ao site",product_view:"Visualizou produto",whatsapp:"Abriu WhatsApp",gift:"Pediu sugestão",add_cart:"Adicionou ao pedido",order_created:"Criou pedido",order_track:"Acompanhou pedido"};
+  return (list||[]).map(e=>`<li><strong>${esc(map[e.event_type]||e.event_type)}</strong><span>${esc(short(e.client_id))}${e.product_id?" • "+esc(names.get(e.product_id)||e.product_id):""} • ${esc(fmt(e.created_at))}</span></li>`).join("")||'<li class="empty">Nenhuma interação registrada ainda.</li>';
+}
+function openProductModal(p=null){
+  $("#productModalTitle").textContent=p?"Editar produto":"Novo produto";$("#pId").value=p?.id||"";$("#pName").value=p?.name||"";$("#pCategory").value=p?.category||"";$("#pLabel").value=p?.label||"";$("#pAge").value=p?.age||"";$("#pPrice").value=p?.price??"";$("#pImage").value=p?.image_url||"";$("#pDescription").value=p?.description||"";$("#productModal").showModal();
+}
+async function saveProduct(id,patch){try{await api("product",{method:"PATCH",body:JSON.stringify({id,...patch})});toast("Produto atualizado.");await load({quiet:true})}catch(e){console.error(e);toast("Não foi possível salvar.")}}
+async function ensureDetailedOrder(id){
+  let found=orders.find(o=>o.id===id);
+  if(found&&Array.isArray(found.items)&&Array.isArray(found.timeline)&&found.timeline.length)return found;
+  const fresh=await api("orders",{timeout:18000});orders=fresh.orders||orders;return orders.find(o=>o.id===id)||found;
+}
+async function openOrder(id){
+  try{
+    currentOrder=await ensureDetailedOrder(id);if(!currentOrder)return;
+    if(currentOrder.status==="received"){await api("order_status",{method:"PATCH",body:JSON.stringify({id:currentOrder.id,status:"seen",note:"Pedido aberto no painel administrativo."})});await load({quiet:true});currentOrder=await ensureDetailedOrder(id)}
+    $("#orderTitle").textContent=`${currentOrder.order_code} • ${labels[currentOrder.status]||currentOrder.status}`;
+    $("#orderInfo").innerHTML=`<div class="infoBox"><small>Cliente</small><strong>${esc(currentOrder.customer_name)}</strong></div><div class="infoBox"><small>WhatsApp</small><strong>${esc(currentOrder.phone)}</strong></div><div class="infoBox"><small>E-mail</small><strong>${esc(currentOrder.customer_email||"-")}</strong></div><div class="infoBox"><small>Retirada</small><strong>${esc((currentOrder.pickup_date?dateOnly(currentOrder.pickup_date):"A combinar")+" "+(currentOrder.pickup_time||""))}</strong></div><div class="infoBox"><small>Pagamento</small><strong>${esc(currentOrder.payment_method||"A combinar")}</strong></div><div class="infoBox"><small>Criado em</small><strong>${esc(fmt(currentOrder.created_at))}</strong></div><div class="infoBox"><small>Status</small><strong>${esc(labels[currentOrder.status]||currentOrder.status)}</strong></div>`;
+    const items=Array.isArray(currentOrder.items)?currentOrder.items:[];
+    $("#orderItems").innerHTML='<strong>Itens</strong>'+items.map(i=>`<div class="orderItem"><span>${Number(i.qty||0)}× ${esc(i.product_name)}</span><strong>${esc(brl(i.unit_price))}</strong></div>`).join("")+(currentOrder.notes?`<div class="infoBox"><small>Observações</small><strong>${esc(currentOrder.notes)}</strong></div>`:"");
+    const timeline=Array.isArray(currentOrder.timeline)?currentOrder.timeline:[];
+    $("#orderTimeline").innerHTML=timeline.map(t=>`<li><strong>${esc(labels[t.status]||t.status)}</strong><span>${esc(fmt(t.created_at)+(t.note?" • "+t.note:""))}</span></li>`).join("");
+    const idx=flow.indexOf(currentOrder.status),next=idx>=0?flow[idx+1]:null;$("#orderNext").disabled=!next||currentOrder.status==="cancelled";$("#orderNext").textContent=next?`Avançar para ${labels[next]}`:currentOrder.status==="cancelled"?"Pedido cancelado":"Pedido concluído";$("#orderCancel").style.display=["picked_up","cancelled"].includes(currentOrder.status)?"none":"inline-block";
+    $("#orderModal").showModal();
+  }catch(e){console.error(e);toast("Não foi possível abrir os detalhes do pedido.")}
+}
+async function changeStatus(id,status,note=""){
+  try{await api("order_status",{method:"PATCH",body:JSON.stringify({id,status,note})});if($("#orderModal").open)$("#orderModal").close();toast("Status atualizado.");await load({quiet:true});currentOrder=orders.find(o=>o.id===id)||null;if(currentOrder)openOrder(id)}catch(e){console.error(e);toast("Não foi possível alterar o status.")}
+}
+function setSide(open){$("#side").classList.toggle("open",open);$("#sideBackdrop").classList.toggle("show",open);$("#menuBtn").setAttribute("aria-expanded",String(open));document.body.style.overflow=open&&innerWidth<=1000?"hidden":""}
+$$(".tab").forEach(t=>t.addEventListener("click",()=>{$$(".tab").forEach(x=>x.classList.remove("on"));$$(".panel").forEach(x=>x.classList.remove("on"));t.classList.add("on");$(`[data-panel="${t.dataset.tab}"]`)?.classList.add("on");setSide(false)}));
+$("#menuBtn").addEventListener("click",e=>{e.stopPropagation();setSide(!$("#side").classList.contains("open"))});
+$("#sideBackdrop").addEventListener("click",()=>setSide(false));
+addEventListener("resize",()=>{if(innerWidth>1000)setSide(false)});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")setSide(false)});
-$("#refresh").onclick=load;$("#reloadOrders").onclick=load;$("#logout").onclick=async()=>{try{if(session?.access_token)await fetch(AUTH_URL+"/auth/v1/logout",{method:"POST",headers:{"apikey":AUTH_KEY,"Authorization":"Bearer "+session.access_token}})}catch{}clearAdminSession();location.replace("admin-login.html?v=20260902-1100")};
-$("#catalogSearch").oninput=renderCatalog;$("#orderSearch").oninput=renderOrders;$("#newProduct").onclick=()=>openProductModal();document.querySelectorAll("[data-order-filter]").forEach(b=>b.onclick=()=>{orderGroup=b.dataset.orderFilter;renderOrders();b.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"})});
-$("#catalogRows").onclick=e=>{const active=e.target.closest("[data-active]"),edit=e.target.closest("[data-edit]"),del=e.target.closest("[data-delete]");if(active){const p=dashboard.products.find(x=>x.id===active.dataset.active);saveProduct(p.id,{active:!p.active})}if(edit){const p=dashboard.products.find(x=>x.id===edit.dataset.edit);openProductModal(p)}if(del){const p=dashboard.products.find(x=>x.id===del.dataset.delete);if(confirm('Excluir "'+p.name+'" do catálogo? Essa ação remove o item do sistema.')){fetch(API+"?action=product&id="+encodeURIComponent(p.id),{method:"DELETE",headers:{"Authorization":"Bearer "+session.access_token}}).then(r=>{if(!r.ok)throw 0;toast("Produto excluído.");load()}).catch(()=>toast("Não foi possível excluir."))}}};
-$("#productForm").onsubmit=async e=>{e.preventDefault();const id=$("#pId").value,payload={name:$("#pName").value,category:$("#pCategory").value,label:$("#pLabel").value,age:$("#pAge").value,price:$("#pPrice").value===""?null:Number($("#pPrice").value),image_url:$("#pImage").value,description:$("#pDescription").value};try{if(id)await api("product",{method:"PATCH",body:JSON.stringify({id,...payload})});else await api("product",{method:"POST",body:JSON.stringify(payload)});$("#productModal").close();toast(id?"Produto atualizado.":"Produto adicionado.");await load()}catch(e){console.error(e);toast("Não foi possível salvar o produto.")}};
-$("#ordersList").onclick=e=>{const open=e.target.closest("[data-order-open]"),next=e.target.closest("[data-order-next]");if(open)openOrder(open.dataset.orderOpen);if(next){const o=orders.find(x=>x.id===next.dataset.orderNext),n=flow[flow.indexOf(o.status)+1];if(n)changeStatus(o.id,n)}};
+
+$("#refresh").onclick=()=>load();$("#reloadOrders").onclick=()=>load();$("#catalogSearch").oninput=renderCatalog;$("#orderSearch").oninput=renderOrders;$("#newProduct").onclick=()=>openProductModal();
+$$("[data-order-filter]").forEach(b=>b.onclick=()=>{orderGroup=b.dataset.orderFilter;renderOrders();b.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"})});
+$("#catalogRows").onclick=e=>{const active=e.target.closest("[data-active]"),edit=e.target.closest("[data-edit]"),del=e.target.closest("[data-delete]");const products=dashboard.products||[];if(active){const p=products.find(x=>x.id===active.dataset.active);if(p)saveProduct(p.id,{active:!p.active})}if(edit){const p=products.find(x=>x.id===edit.dataset.edit);if(p)openProductModal(p)}if(del){const p=products.find(x=>x.id===del.dataset.delete);if(p&&confirm(`Excluir "${p.name}" do catálogo?`))api("product",{method:"DELETE",params:{id:p.id}}).then(()=>{toast("Produto excluído.");load({quiet:true})}).catch(()=>toast("Não foi possível excluir."))}};
+$("#productForm").onsubmit=async e=>{e.preventDefault();const id=$("#pId").value,payload={name:$("#pName").value,category:$("#pCategory").value,label:$("#pLabel").value,age:$("#pAge").value,price:$("#pPrice").value===""?null:Number($("#pPrice").value),image_url:$("#pImage").value,description:$("#pDescription").value};try{await api("product",{method:id?"PATCH":"POST",body:JSON.stringify(id?{id,...payload}:payload)});$("#productModal").close();toast(id?"Produto atualizado.":"Produto adicionado.");await load({quiet:true})}catch(e){console.error(e);toast("Não foi possível salvar o produto.")}};
+$("#ordersList").onclick=e=>{const open=e.target.closest("[data-order-open]"),next=e.target.closest("[data-order-next]");if(open)openOrder(open.dataset.orderOpen);if(next&&!next.disabled){const o=orders.find(x=>x.id===next.dataset.orderNext);if(o){const n=flow[flow.indexOf(o.status)+1];if(n)changeStatus(o.id,n)}}};
 $("#recentOrders").onclick=e=>{const b=e.target.closest("[data-order-open]");if(b)openOrder(b.dataset.orderOpen)};
 $("#orderNext").onclick=()=>{if(!currentOrder)return;const n=flow[flow.indexOf(currentOrder.status)+1];if(n)changeStatus(currentOrder.id,n)};
 $("#orderCancel").onclick=()=>{if(!currentOrder)return;const reason=prompt("Motivo do cancelamento (opcional):","");if(reason!==null)changeStatus(currentOrder.id,"cancelled",reason)};
 $$("[data-close]").forEach(b=>b.onclick=()=>$("#"+b.dataset.close).close());
-(async()=>{try{if(await requireAdmin()){$("#loading").classList.add("hide");await load();setInterval(()=>{if(!document.hidden&&!document.querySelector("dialog[open]"))load()},15000)}}catch(e){console.error(e);$("#loading").classList.add("hide");if(!dashboard){dashboard=emptyDashboard();orders=[];render()}toast("Painel aberto. Atualize os dados quando a conexão estabilizar.")}})();
+$("#logout").onclick=async()=>{try{if(session?.access_token)await timedFetch(AUTH_URL+"/auth/v1/logout",{method:"POST",headers:{"apikey":AUTH_KEY,"Authorization":"Bearer "+session.access_token}},5000)}catch{}clearAdminSession();location.replace("admin-login.html?v=20260904-0715")};
+
+(async()=>{try{if(await requireAdmin()){await load({quiet:true});setInterval(()=>{if(!document.hidden&&!document.querySelector("dialog[open]"))load({quiet:true})},15000)}}catch(e){console.error(e);if(e?.message!=="unauthorized"){setConnection("O acesso foi validado, mas o painel não conseguiu carregar os dados. Toque em “Atualizar dados”.");render()}}})();
 </script>
 </body>
 </html>
