@@ -59,6 +59,8 @@ jobs:
               for ref in refs:
                   if ref.startswith(('http://','https://','mailto:','tel:','javascript:','data:','blob:')):
                       continue
+                  if '${' in ref or '{{' in ref or '}}' in ref:
+                      continue
                   p=urllib.parse.unquote(ref)
                   target=(html.parent/p).resolve()
                   if not target.exists():
