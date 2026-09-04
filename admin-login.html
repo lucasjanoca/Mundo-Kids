@@ -21,12 +21,13 @@
 const AUTH_URL="https://rgngqumqzylthdiazvfu.supabase.co",AUTH_KEY="sb_publishable_Nw2oaGdMQHVIJNhUpjv5ag_JcxmRu2w";
 const API="https://yncspxfsvlqdnodlsosb.supabase.co/functions/v1/mundo-kids-api";
 const SESSION_KEY="mundo-kids-admin-auth";
+const ADMIN_VERSION="20260904-0720";
 const msg=document.getElementById("msg"),form=document.getElementById("login"),btn=document.getElementById("submit");
 function message(t,type){msg.textContent=t;msg.className="msg "+type}
 function readSession(){try{const p=JSON.parse(localStorage.getItem(SESSION_KEY)||"null");return p?.access_token?p:(p?.session||p?.currentSession||null)}catch{return null}}
 function saveSession(s){try{localStorage.setItem(SESSION_KEY,JSON.stringify(s))}catch{}}
 function clearSession(){try{localStorage.removeItem(SESSION_KEY)}catch{}}
-async function timedFetch(url,opts={},ms=7000){const c=new AbortController(),t=setTimeout(()=>c.abort(),ms);try{return await fetch(url,{...opts,signal:c.signal})}finally{clearTimeout(t)}}
+async function timedFetch(url,opts={},ms=7000){const c=new AbortController(),t=setTimeout(()=>c.abort(),ms);try{return await fetch(url,{...opts,signal:c.signal,cache:"no-store"})}finally{clearTimeout(t)}}
 async function checkAdmin(session){
   if(!session?.access_token)return false;
   try{
@@ -40,7 +41,7 @@ async function passwordLogin(email,password){
   if(!r.ok||!j.access_token)throw new Error("invalid_login");
   return j
 }
-(async()=>{const s=readSession();if(s&&await checkAdmin(s))location.replace("admin.html?v=20260902-1100")})().catch(()=>{});
+(async()=>{const s=readSession();if(s&&await checkAdmin(s))location.replace("admin.html?v="+ADMIN_VERSION)})().catch(()=>{});
 document.getElementById("toggle").onclick=()=>{const p=document.getElementById("password");const show=p.type==="password";p.type=show?"text":"password";document.getElementById("toggle").textContent=show?"Ocultar":"Mostrar"};
 form.onsubmit=async e=>{
   e.preventDefault();btn.disabled=true;message("Verificando acesso...","ok");
@@ -48,12 +49,11 @@ form.onsubmit=async e=>{
     const email=document.getElementById("email").value.trim().toLowerCase(),password=document.getElementById("password").value;
     const session=await passwordLogin(email,password);saveSession(session);
     if(!(await checkAdmin(session))){clearSession();message("Esta conta não possui acesso administrativo ou o serviço está indisponível.","err");return}
-    message("Acesso autorizado.","ok");location.replace("admin.html?v=20260902-1100")
+    message("Acesso autorizado.","ok");location.replace("admin.html?v="+ADMIN_VERSION)
   }catch(e){
     console.error(e);message(e?.message==="invalid_login"?"E-mail ou senha incorretos.":"Não foi possível entrar agora. Tente novamente.","err")
   }finally{btn.disabled=false}
 };
 </script>
-
 </body>
 </html>
