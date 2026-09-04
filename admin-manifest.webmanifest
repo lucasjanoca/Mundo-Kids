@@ -1,0 +1,31 @@
+{
+  "id": "./mundo-kids-admin",
+  "name": "Mundo Kids ADM",
+  "short_name": "Mundo Kids ADM",
+  "description": "Aplicativo administrativo de MUNDO KIDS.",
+  "lang": "pt-BR",
+  "start_url": "./admin-login.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "any",
+  "background_color": "#f4f8fc",
+  "theme_color": "#1565ff",
+  "icons": [
+    {
+      "src": "assets/img/mascot-robot.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "categories": [
+    "business",
+    "shopping",
+    "productivity"
+  ],
+  "prefer_related_applications": false
+}
