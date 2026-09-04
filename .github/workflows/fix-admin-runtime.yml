@@ -1,0 +1,66 @@
+name: Fix Mundo Kids ADM runtime
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-admin-runtime.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix-admin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Fix ADM selector runtime crash
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('admin.html')
+          text = path.read_text(encoding='utf-8')
+          old = '$(".tab").forEach(t=>t.onclick=()=>{$(".tab").forEach(x=>x.classList.remove("on"));$(".panel").forEach(x=>x.classList.remove("on"));'
+          new = '$$(".tab").forEach(t=>t.onclick=()=>{$$(".tab").forEach(x=>x.classList.remove("on"));$$(".panel").forEach(x=>x.classList.remove("on"));'
+          if old not in text:
+              raise SystemExit('Trecho esperado do bug não foi encontrado; nenhuma alteração aplicada.')
+          text = text.replace(old, new, 1)
+          path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Validate ADM JavaScript and runtime selectors
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          text = Path('admin.html').read_text(encoding='utf-8')
+          assert '$(".tab").forEach' not in text
+          assert '$(".panel").forEach' not in text
+          assert '$$(".tab").forEach' in text
+          assert '$$(".panel").forEach' in text
+          assert '$("#menuBtn").onclick' in text
+          assert 'await load()' in text
+          blocks = re.findall(r'<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)</script>', text, re.I)
+          Path('/tmp/admin-inline.js').write_text('\n'.join(blocks), encoding='utf-8')
+          PY
+          node --check /tmp/admin-inline.js
+
+      - name: Commit fix
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'InfoTech.io automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add admin.html
+          git diff --cached --check
+          git commit -m 'fix: restore Mundo Kids ADM menu and order loading'
+          git push origin HEAD:main
