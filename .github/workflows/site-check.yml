@@ -87,6 +87,33 @@ jobs:
           PY
           for f in /tmp/mk-js/*.js; do node --check "$f"; done
 
+      - name: Reject single-selector forEach runtime crashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          failed=[]
+          for html in [Path('index.html'),Path('admin-login.html'),Path('admin.html')]:
+              text=html.read_text(encoding='utf-8')
+              matches=re.findall(r'(?<!\$)\$\([^\n;]*?\)\.forEach\s*\(',text)
+              if matches:
+                  failed.append(f'{html}: querySelector único usado com .forEach: {matches[:3]}')
+          if failed:
+              raise SystemExit('\n'.join(failed))
+          PY
+
+      - name: Verify ADM critical wiring
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -Fq '$$(".tab").forEach' admin.html
+          grep -Fq '$("#menuBtn").addEventListener' admin.html
+          grep -Fq 'api("dashboard"' admin.html
+          grep -Fq 'api("orders"' admin.html
+          grep -Fq 'await requireAdmin()' admin.html
 
       - name: Verify production backend health
         shell: bash
